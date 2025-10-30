@@ -388,7 +388,7 @@
 
     <script>
         const allQuestions = [
-            // Aggregates Questions
+            // Aggregates Questions (14 questions)
             {
                 topic: "Aggregates",
                 question: "What is the primary purpose of an Aggregate in OutSystems 11?",
@@ -2682,8 +2682,2109 @@
                 ],
                 correct: 0,
                 explanation: "Sort order across pagination is maintained by storing sort preferences in Client Variables and applying them to aggregate queries on each page load."
+            },
+            
+            // Fetching Data on Screens Questions (14 questions)
+            {
+                topic: "Fetching Data on Screens",
+                question: "What is the recommended method to populate a screen with data in OutSystems 11?",
+                options: [
+                    "Using JavaScript to fetch data",
+                    "Using Aggregates in the Preparation action",
+                    "Using SQL queries directly in widgets",
+                    "Using external APIs only"
+                ],
+                correct: 1,
+                explanation: "Aggregates in the Preparation action are the recommended method for fetching data to populate screens in OutSystems 11."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "When does the Preparation action execute in the screen lifecycle?",
+                options: [
+                    "After the screen is rendered to the user",
+                    "Before the screen is rendered, on the server side",
+                    "Only when the user refreshes the page",
+                    "During user interaction with widgets"
+                ],
+                correct: 1,
+                explanation: "The Preparation action executes on the server side before the screen is rendered, allowing data preparation for display."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "How can you pass parameters to a screen for data filtering?",
+                options: [
+                    "Using URL parameters only",
+                    "Using Input Parameters in the screen",
+                    "Using global variables only",
+                    "Parameters cannot be passed to screens"
+                ],
+                correct: 1,
+                explanation: "Input Parameters in screens allow you to pass data for filtering and customizing screen behavior."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "What happens when you drag an Entity to a screen?",
+                options: [
+                    "Only the entity structure is copied",
+                    "An aggregate is automatically created to fetch the data",
+                    "The entity is deleted from the data model",
+                    "A form is created without data binding"
+                ],
+                correct: 1,
+                explanation: "Dragging an Entity to a screen automatically creates an aggregate to fetch and display the entity's data."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "How do you refresh data on a screen after a user action?",
+                options: [
+                    "Reload the entire page",
+                    "Use the Refresh Data action",
+                    "Clear browser cache",
+                    "Data refresh is automatic"
+                ],
+                correct: 1,
+                explanation: "The Refresh Data action refreshes specific aggregates or data actions without reloading the entire page."
+            },
+            
+            // Form Validations Questions (14 questions)  
+            {
+                topic: "Form Validations",
+                question: "What are the two types of validation available in OutSystems?",
+                options: [
+                    "Client-side and server-side validation",
+                    "Built-in and custom validation",
+                    "Field and form validation",
+                    "Automatic and manual validation"
+                ],
+                correct: 0,
+                explanation: "OutSystems provides both client-side validation (immediate feedback) and server-side validation (business rules and security)."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you make an Input widget mandatory in OutSystems 11?",
+                options: [
+                    "Set the Required property to True",
+                    "Set the Mandatory property to True",
+                    "Add custom validation logic",
+                    "Use the ValidateInput action"
+                ],
+                correct: 1,
+                explanation: "The Mandatory property of Input widgets automatically enforces required field validation."
+            },
+            {
+                topic: "Form Validations",
+                question: "What widget is used to display validation messages?",
+                options: [
+                    "ValidationSummary widget",
+                    "ErrorMessage widget",
+                    "Alert widget",
+                    "MessageBox widget"
+                ],
+                correct: 0,
+                explanation: "The ValidationSummary widget displays all validation messages in a centralized location on the form."
+            },
+            {
+                topic: "Form Validations",
+                question: "When do client-side validations execute?",
+                options: [
+                    "Only when the form is submitted",
+                    "When the user leaves a field (on blur) or submits the form",
+                    "Only when the page loads",
+                    "Client-side validations don't exist in OutSystems"
+                ],
+                correct: 1,
+                explanation: "Client-side validations execute when users leave fields or submit forms, providing immediate feedback."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you implement custom validation logic?",
+                options: [
+                    "Use JavaScript only",
+                    "Create validation actions and call them in the form's validation flow",
+                    "Custom validation is not supported",
+                    "Use CSS for validation"
+                ],
+                correct: 1,
+                explanation: "Custom validation logic is implemented by creating validation actions and calling them in the form's validation flow."
+            },
+            
+            // Input Widgets Questions (14 questions)
+            {
+                topic: "Input Widgets",
+                question: "Which input type should you use for capturing email addresses?",
+                options: [
+                    "Text",
+                    "Email",
+                    "String",
+                    "Email_Address"
+                ],
+                correct: 1,
+                explanation: "The Email input type provides built-in email validation and appropriate keyboard layouts on mobile devices."
+            },
+            {
+                topic: "Input Widgets",
+                question: "What is the purpose of the Prompt property in Input widgets?",
+                options: [
+                    "To set the default value",
+                    "To provide placeholder text",
+                    "To validate the input",
+                    "To set the maximum length"
+                ],
+                correct: 1,
+                explanation: "The Prompt property displays placeholder text to guide users on what information to enter."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you create a dropdown with dynamic options?",
+                options: [
+                    "Use a Dropdown widget with Source property set to an aggregate",
+                    "Use a Text input with JavaScript",
+                    "Use multiple Radio Button widgets",
+                    "Dynamic dropdowns are not supported"
+                ],
+                correct: 0,
+                explanation: "Dropdown widgets can be populated dynamically by setting the Source property to an aggregate or list."
+            },
+            {
+                topic: "Input Widgets",
+                question: "What widget should you use for multi-line text input?",
+                options: [
+                    "Input widget",
+                    "TextArea widget",
+                    "Text widget",
+                    "Expression widget"
+                ],
+                correct: 1,
+                explanation: "The TextArea widget is designed for multi-line text input and automatically handles line breaks."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you implement input masking for phone numbers?",
+                options: [
+                    "Use the Mask property of the Input widget",
+                    "Use JavaScript for masking",
+                    "Input masking is not supported",
+                    "Use regular expressions in validation"
+                ],
+                correct: 0,
+                explanation: "The Mask property of Input widgets provides built-in input masking for formatted input like phone numbers."
+            },
+            
+            // Logic Flows Questions (14 questions)
+            {
+                topic: "Logic Flows",
+                question: "What is the main difference between Client Actions and Server Actions?",
+                options: [
+                    "Client Actions are faster than Server Actions",
+                    "Server Actions run on the server, Client Actions run in the browser",
+                    "There is no difference between them",
+                    "Client Actions can access databases, Server Actions cannot"
+                ],
+                correct: 1,
+                explanation: "Server Actions execute on the server and can access databases, while Client Actions execute in the browser for UI logic."
+            },
+            {
+                topic: "Logic Flows",
+                question: "When should you use a Client Action instead of a Server Action?",
+                options: [
+                    "When accessing database data",
+                    "When performing UI manipulations without server communication",
+                    "When implementing security logic",
+                    "When calling external web services"
+                ],
+                correct: 1,
+                explanation: "Client Actions are ideal for UI manipulations, client-side validations, and logic that doesn't require server resources."
+            },
+            {
+                topic: "Logic Flows",
+                question: "How do you pass data from a Client Action to a Server Action?",
+                options: [
+                    "Using global variables",
+                    "Using input parameters when calling the Server Action",
+                    "Using session variables only",
+                    "Data cannot be passed between different action types"
+                ],
+                correct: 1,
+                explanation: "Data is passed between Client and Server Actions through input parameters when making the action call."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What widget is used to implement conditional logic in action flows?",
+                options: [
+                    "Switch widget",
+                    "If widget",
+                    "Condition widget",
+                    "Branch widget"
+                ],
+                correct: 1,
+                explanation: "The If widget is used to implement conditional logic and branching in action flows."
+            },
+            {
+                topic: "Logic Flows",
+                question: "How do you implement loops in OutSystems action flows?",
+                options: [
+                    "Using While loops only",
+                    "Using For Each widgets",
+                    "Loops are not supported in visual flows",
+                    "Using JavaScript only"
+                ],
+                correct: 1,
+                explanation: "For Each widgets are used to implement loops that iterate over lists or record sets in action flows."
+            },
+            
+            // Modular Dependencies Questions (14 questions)
+            {
+                topic: "Modular Dependencies",
+                question: "What is a Producer module in OutSystems?",
+                options: [
+                    "A module that only consumes functionality",
+                    "A module that exposes public elements for other modules to use",
+                    "A module that handles only data operations",
+                    "A module that manages user interfaces"
+                ],
+                correct: 1,
+                explanation: "A Producer module exposes public elements (entities, actions, screens) that can be referenced by other modules."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What happens when you reference a public entity from another module?",
+                options: [
+                    "The entity is copied to your module",
+                    "A read-only reference is created",
+                    "The entity becomes editable in your module",
+                    "The original entity is moved to your module"
+                ],
+                correct: 1,
+                explanation: "Referencing a public entity creates a read-only reference that stays synchronized with the original."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "How do you make an element public in a module?",
+                options: [
+                    "Elements are public by default",
+                    "Set the Public property to True in the element's properties",
+                    "Use the MakePublic action",
+                    "Public elements cannot be created"
+                ],
+                correct: 1,
+                explanation: "Elements are made public by setting their Public property to True in the element's properties panel."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What is the recommended approach for managing module dependencies?",
+                options: [
+                    "Create as many dependencies as possible",
+                    "Minimize dependencies and use clear interfaces",
+                    "Avoid dependencies completely",
+                    "Use circular dependencies for flexibility"
+                ],
+                correct: 1,
+                explanation: "Best practice is to minimize dependencies and expose only necessary elements through well-defined interfaces."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What happens when a referenced public element is changed in the producer module?",
+                options: [
+                    "Consumer modules must be manually updated",
+                    "Changes are automatically reflected after publishing",
+                    "References become broken",
+                    "Consumer modules must recreate the references"
+                ],
+                correct: 1,
+                explanation: "Changes to public elements are automatically reflected in consumer modules after the producer module is published."
+            },
+            
+            // Pagination and Sorting Questions (14 questions)
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement pagination in an Aggregate?",
+                options: [
+                    "Using Start Index and Max Records properties",
+                    "Using Page and Size properties",
+                    "Using Offset and Limit properties",
+                    "Pagination is automatic in all aggregates"
+                ],
+                correct: 0,
+                explanation: "Pagination is implemented using Start Index (starting record) and Max Records (page size) properties."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "What is the formula for calculating Start Index for pagination?",
+                options: [
+                    "PageNumber * PageSize",
+                    "(PageNumber - 1) * PageSize",
+                    "PageNumber + PageSize - 1",
+                    "PageSize / PageNumber"
+                ],
+                correct: 1,
+                explanation: "Start Index is calculated as (PageNumber - 1) * PageSize to properly offset to the beginning of the page."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement dynamic sorting in an Aggregate?",
+                options: [
+                    "Sorting is fixed and cannot be changed",
+                    "Use expressions in the Sort property",
+                    "Create multiple aggregates for each sort option",
+                    "Use JavaScript for client-side sorting"
+                ],
+                correct: 1,
+                explanation: "Dynamic sorting is implemented using expressions in the Sort property that evaluate based on user selection."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "What widget is commonly used to implement pagination controls?",
+                options: [
+                    "Pagination widget",
+                    "TablePagination widget",
+                    "Navigation widget",
+                    "PageControls widget"
+                ],
+                correct: 0,
+                explanation: "The Pagination widget provides ready-to-use pagination controls with navigation buttons and page information."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you maintain sort criteria across page navigation?",
+                options: [
+                    "Store sort criteria in local variables",
+                    "Use URL parameters to persist sort criteria",
+                    "Sort criteria is automatically maintained",
+                    "Re-sort on each page load"
+                ],
+                correct: 1,
+                explanation: "URL parameters or session variables can be used to persist sort criteria across page navigation."
+            },
+            
+            // Role-based Security Questions (14 questions)
+            {
+                topic: "Role-based Security",
+                question: "How do you restrict access to a screen based on user roles?",
+                options: [
+                    "Use If conditions in the Preparation action",
+                    "Set the Roles property of the screen",
+                    "Use JavaScript for access control",
+                    "Access control is not possible at screen level"
+                ],
+                correct: 1,
+                explanation: "The Roles property of screens automatically enforces role-based access control."
+            },
+            {
+                topic: "Role-based Security",
+                question: "What function checks if the current user has a specific role?",
+                options: [
+                    "HasRole()",
+                    "CheckRole()",
+                    "GetUserRole()",
+                    "ValidateRole()"
+                ],
+                correct: 1,
+                explanation: "The CheckRole() function returns true if the current user has the specified role."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you assign a role to a user programmatically?",
+                options: [
+                    "Use the AssignRole() action",
+                    "Use the GrantUserRole() action",
+                    "Use the SetRole() action",
+                    "Roles can only be assigned manually"
+                ],
+                correct: 1,
+                explanation: "The GrantUserRole() action programmatically assigns a role to a specific user."
+            },
+            {
+                topic: "Role-based Security",
+                question: "What is the Anonymous role in OutSystems?",
+                options: [
+                    "A role for administrators",
+                    "A role automatically assigned to non-authenticated users",
+                    "A role for temporary users",
+                    "A deprecated role"
+                ],
+                correct: 1,
+                explanation: "The Anonymous role is automatically assigned to users who are not authenticated (not logged in)."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you remove a role from a user?",
+                options: [
+                    "Use the RemoveRole() action",
+                    "Use the RevokeUserRole() action",
+                    "Use the DeleteRole() action",
+                    "Roles cannot be removed once assigned"
+                ],
+                correct: 1,
+                explanation: "The RevokeUserRole() action removes a specific role from a user."
+            },
+            
+            // Screen Lifecycle Questions (10 questions)
+            {
+                topic: "Screen Lifecycle",
+                question: "What is the correct order of screen events in a Reactive Web App?",
+                options: [
+                    "On Initialize, On Ready, On Render, On Destroy",
+                    "On Ready, On Initialize, On Render, On Destroy",
+                    "On Render, On Initialize, On Ready, On Destroy",
+                    "On Initialize, On Render, On Ready, On Destroy"
+                ],
+                correct: 0,
+                explanation: "The correct order is: On Initialize (server-side preparation), On Ready (client-side initialization), On Render (DOM ready), On Destroy (cleanup)."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "When should you use the On Destroy event?",
+                options: [
+                    "To fetch initial data",
+                    "To cleanup resources and unsubscribe from events",
+                    "To validate user input",
+                    "To initialize UI components"
+                ],
+                correct: 1,
+                explanation: "On Destroy is used for cleanup tasks like removing event listeners and freeing resources when the screen is destroyed."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What type of logic should be placed in the On Ready event?",
+                options: [
+                    "Database queries",
+                    "Client-side DOM manipulations and JavaScript initialization",
+                    "Server-side validations",
+                    "Entity operations"
+                ],
+                correct: 1,
+                explanation: "On Ready is ideal for client-side DOM manipulations, JavaScript initialization, and setting up client-side behavior."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "In which event should you fetch data using Aggregates?",
+                options: [
+                    "On Ready",
+                    "On Initialize",
+                    "On Render",
+                    "On Destroy"
+                ],
+                correct: 1,
+                explanation: "Data fetching using Aggregates should be done in the On Initialize event before the screen is rendered."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What happens if an exception occurs in the On Initialize event?",
+                options: [
+                    "The screen continues to load normally",
+                    "An error page is displayed and screen loading stops",
+                    "Only the problematic data is skipped",
+                    "The exception is ignored"
+                ],
+                correct: 1,
+                explanation: "Exceptions in On Initialize prevent the screen from loading and typically display an error page."
+            },
+            
+            // Client Variables Questions (10 questions)
+            {
+                topic: "Client Variables",
+                question: "Where are Client Variables stored?",
+                options: [
+                    "On the server in the database",
+                    "In the browser's local storage",
+                    "In server memory",
+                    "In temporary files"
+                ],
+                correct: 1,
+                explanation: "Client Variables are stored in the browser's local storage, persisting across page navigation but cleared when the browser is refreshed."
+            },
+            {
+                topic: "Client Variables",
+                question: "What is the default value of a Client Variable?",
+                options: [
+                    "Empty string",
+                    "The default value of its data type",
+                    "Null",
+                    "Undefined"
+                ],
+                correct: 1,
+                explanation: "Client Variables are initialized with the default value of their assigned data type (e.g., 0 for Integer, empty string for Text)."
+            },
+            {
+                topic: "Client Variables",
+                question: "How do you access a Client Variable in expressions?",
+                options: [
+                    "ClientVar.VariableName",
+                    "Directly by the variable name",
+                    "Session.VariableName",
+                    "Local.VariableName"
+                ],
+                correct: 1,
+                explanation: "Client Variables are accessed directly by their name in expressions, just like local variables."
+            },
+            {
+                topic: "Client Variables",
+                question: "When are Client Variables reset?",
+                options: [
+                    "When navigating between screens",
+                    "When the browser is refreshed or closed",
+                    "Every hour automatically",
+                    "When the user logs out only"
+                ],
+                correct: 1,
+                explanation: "Client Variables are reset when the browser is refreshed, closed, or when the browser's local storage is cleared."
+            },
+            {
+                topic: "Client Variables",
+                question: "What is the maximum recommended size for data stored in Client Variables?",
+                options: [
+                    "No limit",
+                    "Keep it minimal as it affects browser performance",
+                    "10MB per variable",
+                    "1GB total"
+                ],
+                correct: 1,
+                explanation: "Client Variables should store minimal data as large amounts can affect browser performance and are limited by browser storage quotas."
+            },
+            
+            // UI Development Questions (10 questions)
+            {
+                topic: "UI Development",
+                question: "What is the purpose of Blocks in OutSystems 11?",
+                options: [
+                    "To create database tables",
+                    "To create reusable UI components",
+                    "To handle server actions",
+                    "To manage user sessions"
+                ],
+                correct: 1,
+                explanation: "Blocks are reusable UI components that can be used across multiple screens to promote consistency and reduce development time."
+            },
+            {
+                topic: "UI Development",
+                question: "How do you pass data to a Block?",
+                options: [
+                    "Using global variables",
+                    "Using Input Parameters",
+                    "Using Client Variables",
+                    "Data cannot be passed to Blocks"
+                ],
+                correct: 1,
+                explanation: "Data is passed to Blocks through Input Parameters defined in the Block's interface."
+            },
+            {
+                topic: "UI Development",
+                question: "What is the purpose of Block Events?",
+                options: [
+                    "To handle database operations",
+                    "To communicate from the Block back to the parent screen",
+                    "To validate user input",
+                    "To manage navigation"
+                ],
+                correct: 1,
+                explanation: "Block Events allow communication from the Block back to the parent screen, enabling Blocks to notify parents of user actions."
+            },
+            {
+                topic: "UI Development",
+                question: "Which widget should you use to display an image in OutSystems 11?",
+                options: [
+                    "Picture widget",
+                    "Image widget",
+                    "Media widget",
+                    "Display widget"
+                ],
+                correct: 1,
+                explanation: "The Image widget is used to display images in OutSystems applications, supporting various image formats and sources."
+            },
+            {
+                topic: "UI Development",
+                question: "How do you implement responsive design in OutSystems 11?",
+                options: [
+                    "Using custom JavaScript only",
+                    "Using built-in responsive features and CSS classes",
+                    "Responsive design is not supported",
+                    "Creating separate mobile versions"
+                ],
+                correct: 1,
+                explanation: "OutSystems 11 provides built-in responsive features and CSS classes from OutSystems UI to create responsive applications."
+            },
+            
+            // Data Display Widgets Questions (10 questions)
+            {
+                topic: "Data Display Widgets",
+                question: "What is the main advantage of using a Table widget over a List widget?",
+                options: [
+                    "Tables are more flexible in layout",
+                    "Tables provide built-in sorting and column management",
+                    "Tables load faster",
+                    "Tables support more data types"
+                ],
+                correct: 1,
+                explanation: "Table widgets provide built-in features like sorting, column resizing, and structured data display that are ideal for tabular data."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "How do you implement master-detail views using List widgets?",
+                options: [
+                    "Use nested List widgets",
+                    "Use events to communicate between List widgets",
+                    "Master-detail is not supported with List widgets",
+                    "Use separate screens for detail view"
+                ],
+                correct: 1,
+                explanation: "Master-detail views are implemented using events to communicate selection from the master List to update the detail view."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "What widget is best for displaying a single record's details?",
+                options: [
+                    "Table widget",
+                    "List widget",
+                    "Form widget",
+                    "Expression widgets"
+                ],
+                correct: 3,
+                explanation: "Expression widgets are ideal for displaying individual field values from a single record in a flexible layout."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "How do you implement empty states in data display widgets?",
+                options: [
+                    "Use If widgets to check if data exists",
+                    "Empty states are handled automatically",
+                    "Use JavaScript to hide widgets",
+                    "Empty states are not supported"
+                ],
+                correct: 0,
+                explanation: "Empty states are implemented using If widgets that check if the data source is empty and display appropriate messaging."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "What property controls the number of items displayed per page in a List widget?",
+                options: [
+                    "Page Size",
+                    "Max Records",
+                    "Items Per Page",
+                    "Display Limit"
+                ],
+                correct: 1,
+                explanation: "The Max Records property in the data source (aggregate) controls how many items are displayed per page in List widgets."
+            },
+            
+            // Advanced Data Operations Questions (10 questions)
+            {
+                topic: "Advanced Data Operations",
+                question: "When should you use Advanced SQL queries instead of Aggregates?",
+                options: [
+                    "For simple data retrieval",
+                    "For complex queries with database-specific functions or advanced joins",
+                    "For better performance",
+                    "For mobile applications"
+                ],
+                correct: 1,
+                explanation: "Advanced SQL queries are used when Aggregates cannot handle complex operations like window functions, recursive queries, or database-specific features."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "How do you implement data caching in OutSystems 11?",
+                options: [
+                    "Use Client Variables for temporary caching",
+                    "Caching is automatic",
+                    "Use server variables",
+                    "Caching is not supported"
+                ],
+                correct: 0,
+                explanation: "Client Variables can be used for temporary client-side caching, while server-side caching can be implemented using session variables or custom logic."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "What is the purpose of the CreateOrUpdate pattern in OutSystems?",
+                options: [
+                    "To create entities",
+                    "To handle both insert and update operations in a single action",
+                    "To delete records",
+                    "To validate data"
+                ],
+                correct: 1,
+                explanation: "CreateOrUpdate pattern allows a single action to either create a new record or update an existing one based on whether the record already exists."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "How do you implement bulk data operations efficiently?",
+                options: [
+                    "Use individual create/update actions in a loop",
+                    "Use BulkInsert and BulkUpdate actions",
+                    "Use JavaScript for bulk operations",
+                    "Bulk operations are not supported"
+                ],
+                correct: 1,
+                explanation: "BulkInsert and BulkUpdate actions are more efficient for processing large datasets as they minimize database round trips."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "What is the difference between Entity Actions and Custom Actions for data operations?",
+                options: [
+                    "No difference",
+                    "Entity Actions are auto-generated for CRUD operations, Custom Actions are manually created",
+                    "Entity Actions are faster",
+                    "Custom Actions are deprecated"
+                ],
+                correct: 1,
+                explanation: "Entity Actions are automatically generated CRUD operations, while Custom Actions are manually created for specific business logic."
+            },
+            
+            // REST APIs Questions (10 questions)
+            {
+                topic: "REST APIs",
+                question: "How do you consume a REST API in OutSystems 11?",
+                options: [
+                    "Use the REST consumer wizard",
+                    "Write custom JavaScript",
+                    "Use SQL queries",
+                    "REST APIs cannot be consumed"
+                ],
+                correct: 0,
+                explanation: "OutSystems 11 provides a REST consumer wizard that generates the necessary actions and structures to consume external REST APIs."
+            },
+            {
+                topic: "REST APIs",
+                question: "What HTTP methods are supported when exposing REST APIs in OutSystems?",
+                options: [
+                    "GET and POST only",
+                    "GET, POST, PUT, DELETE",
+                    "All HTTP methods",
+                    "Only GET"
+                ],
+                correct: 1,
+                explanation: "OutSystems supports the main HTTP methods: GET, POST, PUT, and DELETE for REST API operations."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you handle authentication in REST API consumption?",
+                options: [
+                    "Authentication is not supported",
+                    "Configure authentication in the REST service properties",
+                    "Use only cookies",
+                    "Handle manually in each call"
+                ],
+                correct: 1,
+                explanation: "Authentication is configured in the REST service properties, supporting various methods like Basic Auth, API Key, and OAuth."
+            },
+            {
+                topic: "REST APIs",
+                question: "What is the purpose of the OnBeforeRequest callback in REST consumption?",
+                options: [
+                    "To handle responses",
+                    "To modify requests before they are sent (headers, authentication, etc.)",
+                    "To log errors",
+                    "To validate data"
+                ],
+                correct: 1,
+                explanation: "OnBeforeRequest allows you to modify outgoing requests, add headers, implement custom authentication, or log request details."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you handle different response formats in REST API consumption?",
+                options: [
+                    "Only JSON is supported",
+                    "Configure the expected response format in the method definition",
+                    "Use JavaScript parsing",
+                    "Response format is detected automatically"
+                ],
+                correct: 1,
+                explanation: "The expected response format (JSON, XML, Text) is configured in the REST method definition to properly parse responses."
+            },
+            
+            // Bootstrap Data from Excel Questions (5 questions)
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What happens when you import an Excel file to create entities?",
+                options: [
+                    "Only the entity structure is created",
+                    "Both entity structure and bootstrap data are created",
+                    "Only data is imported",
+                    "The Excel file is stored as-is"
+                ],
+                correct: 1,
+                explanation: "Importing Excel creates both the entity structure based on columns and bootstrap actions to populate the entity with the Excel data."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "When is bootstrap data executed?",
+                options: [
+                    "Every time the application runs",
+                    "During the first deployment after publishing",
+                    "Only in development environment",
+                    "When manually triggered"
+                ],
+                correct: 1,
+                explanation: "Bootstrap data is executed automatically during the first deployment after publishing, populating entities with initial data."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What data types are automatically detected when importing from Excel?",
+                options: [
+                    "Only Text",
+                    "Text, Integer, Boolean, Date based on cell content",
+                    "Only Numbers",
+                    "All data is imported as Text"
+                ],
+                correct: 1,
+                explanation: "OutSystems analyzes Excel cell content to automatically detect appropriate data types like Text, Integer, Boolean, and Date."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "Can you modify bootstrap data after importing from Excel?",
+                options: [
+                    "No, it's read-only",
+                    "Yes, you can edit the bootstrap action and data",
+                    "Only in development mode",
+                    "Only by re-importing"
+                ],
+                correct: 1,
+                explanation: "Bootstrap actions and data can be modified after import by editing the generated bootstrap action or the entity structure."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What happens if you re-import Excel data to an existing entity?",
+                options: [
+                    "Data is appended to existing records",
+                    "Existing data is replaced",
+                    "Import fails",
+                    "A new entity is created"
+                ],
+                correct: 1,
+                explanation: "Re-importing Excel data typically replaces existing bootstrap data, though the behavior can be customized in the bootstrap action."
+            },
+            
+            // Buttons and Links Questions (5 questions)
+            {
+                topic: "Buttons and Links",
+                question: "What is the difference between a Button and a Link widget?",
+                options: [
+                    "No difference",
+                    "Buttons trigger actions, Links navigate to destinations",
+                    "Buttons are faster",
+                    "Links are deprecated"
+                ],
+                correct: 1,
+                explanation: "Buttons are typically used to trigger actions (Client Actions, Server Actions), while Links are used for navigation to screens or external URLs."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you disable a Button widget conditionally?",
+                options: [
+                    "Use JavaScript",
+                    "Set the Enabled property with an expression",
+                    "Buttons cannot be disabled",
+                    "Use CSS only"
+                ],
+                correct: 1,
+                explanation: "The Enabled property can be set using expressions to conditionally enable or disable buttons based on application state."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "What property controls the visual style of a Button?",
+                options: [
+                    "Style",
+                    "Style Classes",
+                    "Theme",
+                    "Appearance"
+                ],
+                correct: 1,
+                explanation: "The Style Classes property allows you to apply CSS classes to control the visual appearance of buttons."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you create a button that opens a new browser tab?",
+                options: [
+                    "Use a Button with Target = '_blank'",
+                    "Use a Link with Target = '_blank'",
+                    "Use JavaScript",
+                    "Not possible with OutSystems widgets"
+                ],
+                correct: 1,
+                explanation: "Link widgets have a Target property that can be set to '_blank' to open the destination in a new browser tab."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "What happens when you set a Button's Method to 'Navigate'?",
+                options: [
+                    "The button becomes a link",
+                    "The button navigates to a screen instead of executing an action",
+                    "The button is disabled",
+                    "Nothing changes"
+                ],
+                correct: 1,
+                explanation: "Setting Method to 'Navigate' makes the button behave like a link, navigating to a specified destination instead of executing an action."
+            },
+            
+            // REST APIs Questions (10 questions)
+            {
+                topic: "REST APIs",
+                question: "How do you consume a REST API in OutSystems 11?",
+                options: [
+                    "Using SOAP Web Services only",
+                    "Using the REST API wizard to create consume methods",
+                    "Writing custom JavaScript code",
+                    "REST APIs are not supported"
+                ],
+                correct: 1,
+                explanation: "OutSystems provides a REST API wizard that automatically creates consume methods based on the API specification or manual configuration."
+            },
+            {
+                topic: "REST APIs",
+                question: "What authentication methods are supported for consuming REST APIs?",
+                options: [
+                    "No authentication only",
+                    "Basic Authentication, API Key, OAuth, and Custom authentication",
+                    "Windows Authentication only",
+                    "SAML authentication only"
+                ],
+                correct: 1,
+                explanation: "OutSystems supports various authentication methods including Basic Auth, API Key, OAuth 2.0, and custom authentication headers."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you handle JSON responses from REST APIs?",
+                options: [
+                    "Parse manually with JavaScript",
+                    "Use Structures that map to the JSON schema",
+                    "Store as text only",
+                    "JSON is not supported"
+                ],
+                correct: 1,
+                explanation: "JSON responses are handled by defining Structures that automatically map to the JSON schema for easy data manipulation."
+            },
+            {
+                topic: "REST APIs",
+                question: "What happens when a REST API call fails in OutSystems?",
+                options: [
+                    "The application crashes",
+                    "An exception is raised that can be handled",
+                    "The call is automatically retried",
+                    "Failure is ignored"
+                ],
+                correct: 1,
+                explanation: "Failed REST API calls raise exceptions that can be caught and handled using exception handling mechanisms."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you expose a REST API from an OutSystems application?",
+                options: [
+                    "Create a REST API element and define methods",
+                    "Use SOAP services only",
+                    "APIs cannot be exposed",
+                    "Use database views"
+                ],
+                correct: 0,
+                explanation: "REST APIs are exposed by creating REST API elements and defining methods with appropriate HTTP verbs and parameters."
+            },
+            {
+                topic: "REST APIs",
+                question: "What HTTP status codes should you return for successful API operations?",
+                options: [
+                    "Always 200 OK",
+                    "200 for GET, 201 for POST, 204 for DELETE",
+                    "Always 500",
+                    "Status codes are automatic"
+                ],
+                correct: 1,
+                explanation: "Different operations should return appropriate status codes: 200 for successful GET, 201 for successful creation, 204 for successful deletion."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you handle API versioning in OutSystems?",
+                options: [
+                    "Versioning is not supported",
+                    "Use different API elements or URL paths for versions",
+                    "Always overwrite existing APIs",
+                    "Use database versioning only"
+                ],
+                correct: 1,
+                explanation: "API versioning is handled by creating different API elements or using version numbers in URL paths to maintain backward compatibility."
+            },
+            {
+                topic: "REST APIs",
+                question: "What is the purpose of the OnRequest callback in REST APIs?",
+                options: [
+                    "To handle responses only",
+                    "To customize requests before they are sent",
+                    "To log API calls",
+                    "OnRequest is not available"
+                ],
+                correct: 1,
+                explanation: "OnRequest callbacks allow customization of HTTP requests before they are sent, including headers, authentication, and request modification."
+            },
+            {
+                topic: "REST APIs",
+                question: "How do you test REST API methods during development?",
+                options: [
+                    "Testing is not possible",
+                    "Use the built-in API testing interface in Service Studio",
+                    "External tools only",
+                    "Deploy and test manually"
+                ],
+                correct: 1,
+                explanation: "Service Studio provides a built-in interface for testing REST API methods with sample data and viewing responses."
+            },
+            {
+                topic: "REST APIs",
+                question: "What is the recommended approach for handling large API responses?",
+                options: [
+                    "Load everything into memory",
+                    "Use pagination and streaming when possible",
+                    "Avoid large responses",
+                    "Use synchronous calls only"
+                ],
+                correct: 1,
+                explanation: "Large API responses should be handled using pagination, streaming, or chunked processing to avoid memory and performance issues."
+            },
+            
+            // Bootstrap Data from Excel Questions (8 questions)
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What is the purpose of Bootstrap actions in OutSystems?",
+                options: [
+                    "To restart the application",
+                    "To import initial data into entities from Excel files",
+                    "To create backups",
+                    "To optimize performance"
+                ],
+                correct: 1,
+                explanation: "Bootstrap actions import initial data from Excel files into entities, typically used for reference data and application setup."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "When do Bootstrap actions execute?",
+                options: [
+                    "Every time the application starts",
+                    "During application deployment and updates",
+                    "When users log in",
+                    "Never automatically"
+                ],
+                correct: 1,
+                explanation: "Bootstrap actions execute automatically during application deployment and when the module is published with changes."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What file formats are supported for Bootstrap data?",
+                options: [
+                    "Only CSV files",
+                    "Excel (.xlsx) and CSV files",
+                    "Only text files",
+                    "XML files only"
+                ],
+                correct: 1,
+                explanation: "Bootstrap actions support both Excel (.xlsx) and CSV file formats for importing data."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "How does OutSystems handle duplicate records during Bootstrap?",
+                options: [
+                    "All records are duplicated",
+                    "Uses record identifiers to update existing records instead of creating duplicates",
+                    "Stops execution on duplicates",
+                    "Duplicates are ignored"
+                ],
+                correct: 1,
+                explanation: "OutSystems uses record identifiers to determine if records exist and updates them instead of creating duplicates."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What happens if Bootstrap data contains invalid values?",
+                options: [
+                    "Invalid rows are skipped silently",
+                    "The bootstrap process fails with detailed error information",
+                    "Invalid values are replaced with defaults",
+                    "The application crashes"
+                ],
+                correct: 1,
+                explanation: "Bootstrap validation failures provide detailed error information including row numbers and specific validation issues."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "How do you reference Static Entity records in Bootstrap data?",
+                options: [
+                    "Use the record identifier or label",
+                    "Use database IDs only",
+                    "Static entities cannot be referenced",
+                    "Use random values"
+                ],
+                correct: 0,
+                explanation: "Static Entity records are referenced using their identifier or label values defined in the Static Entity definition."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "What is the recommended approach for handling large Bootstrap datasets?",
+                options: [
+                    "Split into smaller files",
+                    "Load everything at once",
+                    "Use manual data entry",
+                    "Avoid large datasets"
+                ],
+                correct: 0,
+                explanation: "Large datasets should be split into smaller, manageable files to improve bootstrap performance and reduce memory usage."
+            },
+            {
+                topic: "Bootstrap Data from Excel",
+                question: "Can Bootstrap actions create related records across multiple entities?",
+                options: [
+                    "No, only single entities",
+                    "Yes, by using proper foreign key references",
+                    "Only with manual coding",
+                    "Related records are not supported"
+                ],
+                correct: 1,
+                explanation: "Bootstrap actions can create related records by properly mapping foreign key relationships between entities."
+            },
+            
+            // Buttons and Links Questions (8 questions)
+            {
+                topic: "Buttons and Links",
+                question: "What is the difference between a Button and a Link widget in OutSystems 11?",
+                options: [
+                    "No difference",
+                    "Buttons submit forms, Links navigate to destinations",
+                    "Links are faster than Buttons",
+                    "Buttons only work on mobile"
+                ],
+                correct: 1,
+                explanation: "Buttons are typically used for form submissions and actions, while Links are used for navigation to other screens or external URLs."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you make a Button call a Server Action in a Reactive Web App?",
+                options: [
+                    "Set the Method property to Server Action",
+                    "Set the Destination to the Server Action",
+                    "Use JavaScript only",
+                    "Server Actions cannot be called from Buttons"
+                ],
+                correct: 1,
+                explanation: "In Reactive Web Apps, the Destination property of a Button is set to the Server Action to call it when clicked."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "What happens when you set a Button's 'Is Default' property to True?",
+                options: [
+                    "The button becomes invisible",
+                    "The button is triggered when Enter is pressed in the form",
+                    "The button changes color",
+                    "The button becomes disabled"
+                ],
+                correct: 1,
+                explanation: "Setting 'Is Default' to True makes the button respond to Enter key presses within the form, improving user experience."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you disable a Button based on a condition?",
+                options: [
+                    "Use the Enabled property with an expression",
+                    "Use CSS only",
+                    "Buttons cannot be disabled dynamically",
+                    "Hide the button instead"
+                ],
+                correct: 0,
+                explanation: "The Enabled property accepts expressions that evaluate to True/False to dynamically enable or disable buttons."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "What is the purpose of the Confirmation Message property in Buttons?",
+                options: [
+                    "To show success messages",
+                    "To display a confirmation dialog before executing the action",
+                    "To validate form data",
+                    "To show loading messages"
+                ],
+                correct: 1,
+                explanation: "The Confirmation Message displays a dialog asking users to confirm before executing potentially destructive actions."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you create a Link that opens in a new window/tab?",
+                options: [
+                    "Set the Target property to '_blank'",
+                    "Use JavaScript",
+                    "Links always open in the same window",
+                    "Create a separate screen"
+                ],
+                correct: 0,
+                explanation: "Setting the Target property to '_blank' opens the link destination in a new browser window or tab."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "What is the correct way to pass parameters when navigating with a Link?",
+                options: [
+                    "Parameters cannot be passed",
+                    "Use the destination screen's input parameters",
+                    "Use global variables only",
+                    "Store in session variables"
+                ],
+                correct: 1,
+                explanation: "Parameters are passed through the destination screen's input parameters, which appear when you set the Link's destination."
+            },
+            {
+                topic: "Buttons and Links",
+                question: "How do you style Buttons and Links consistently across an application?",
+                options: [
+                    "Inline styles only",
+                    "Use CSS classes and the Style Classes property",
+                    "Styling is automatic",
+                    "Each button must be styled individually"
+                ],
+                correct: 1,
+                explanation: "Consistent styling is achieved using CSS classes applied through the Style Classes property for maintainable design."
+            },
+            
+            // Data Types Questions (10 questions)
+            {
+                topic: "Data Types",
+                question: "What is the maximum length of a Text data type in OutSystems?",
+                options: [
+                    "255 characters",
+                    "2000 characters",
+                    "50 characters",
+                    "Unlimited"
+                ],
+                correct: 1,
+                explanation: "Text data type has a maximum length of 2000 characters. For longer text, use the Text data type without length limit or Long Text."
+            },
+            {
+                topic: "Data Types",
+                question: "Which data type should you use for storing monetary values?",
+                options: [
+                    "Integer",
+                    "Decimal",
+                    "Text",
+                    "Currency"
+                ],
+                correct: 1,
+                explanation: "Decimal data type is recommended for monetary values to avoid floating-point precision issues common with other numeric types."
+            },
+            {
+                topic: "Data Types",
+                question: "What is the difference between Date and DateTime data types?",
+                options: [
+                    "No difference",
+                    "Date stores only date, DateTime stores date and time",
+                    "DateTime is more accurate",
+                    "Date is for past dates only"
+                ],
+                correct: 1,
+                explanation: "Date stores only the date portion (year, month, day) while DateTime includes both date and time information."
+            },
+            {
+                topic: "Data Types",
+                question: "Which data type is used for storing true/false values?",
+                options: [
+                    "Integer",
+                    "Boolean",
+                    "Text",
+                    "Bit"
+                ],
+                correct: 1,
+                explanation: "Boolean data type stores true/false values and is the standard choice for yes/no, on/off type information."
+            },
+            {
+                topic: "Data Types",
+                question: "What is the purpose of the Entity Identifier data type?",
+                options: [
+                    "To store entity names",
+                    "To reference records in other entities (foreign keys)",
+                    "To store metadata",
+                    "To validate entities"
+                ],
+                correct: 1,
+                explanation: "Entity Identifier is used for foreign key references, storing the unique identifier of records in other entities."
+            },
+            {
+                topic: "Data Types",
+                question: "How do you handle NULL values in OutSystems data types?",
+                options: [
+                    "NULL values are not allowed",
+                    "Use the NullIdentifier() function for identifiers and check for empty values",
+                    "NULL values are automatic",
+                    "Use special NULL data type"
+                ],
+                correct: 1,
+                explanation: "OutSystems handles NULLs using functions like NullIdentifier() for identifiers and by checking for empty/default values."
+            },
+            {
+                topic: "Data Types",
+                question: "What is the range of the Integer data type?",
+                options: [
+                    "-32,768 to 32,767",
+                    "-2,147,483,648 to 2,147,483,647",
+                    "0 to 65,535",
+                    "Unlimited"
+                ],
+                correct: 1,
+                explanation: "Integer data type in OutSystems is a 32-bit signed integer with range from -2,147,483,648 to 2,147,483,647."
+            },
+            {
+                topic: "Data Types",
+                question: "When should you use the Long Integer data type?",
+                options: [
+                    "For small numbers only",
+                    "When you need larger numeric ranges than Integer provides",
+                    "For decimal numbers",
+                    "Long Integer is deprecated"
+                ],
+                correct: 1,
+                explanation: "Long Integer (64-bit) is used when you need numeric ranges larger than the 32-bit Integer data type can handle."
+            },
+            {
+                topic: "Data Types",
+                question: "How do you store file uploads in OutSystems?",
+                options: [
+                    "As Text data type",
+                    "Using Binary Data data type",
+                    "Files cannot be stored",
+                    "Using Integer references"
+                ],
+                correct: 1,
+                explanation: "File uploads are stored using the Binary Data data type, which can handle files, images, and other binary content."
+            },
+            {
+                topic: "Data Types",
+                question: "What is the purpose of Record data types?",
+                options: [
+                    "To store individual records",
+                    "To define structures that group related attributes together",
+                    "To store database metadata",
+                    "Record types are not supported"
+                ],
+                correct: 1,
+                explanation: "Record data types (Structures) group related attributes together, useful for complex data handling and API integrations."
+            },
+            
+            // Error Handling and Logging Questions (8 questions)
+            {
+                topic: "Error Handling and Logging",
+                question: "Where are application errors logged in OutSystems?",
+                options: [
+                    "Local files only",
+                    "Service Center Error Log",
+                    "Database tables only",
+                    "Errors are not logged"
+                ],
+                correct: 1,
+                explanation: "Application errors are automatically logged in the Service Center Error Log, providing centralized error monitoring and analysis."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "How do you log custom information for debugging purposes?",
+                options: [
+                    "Use the LogMessage action",
+                    "Write to files directly",
+                    "Use alert dialogs",
+                    "Custom logging is not supported"
+                ],
+                correct: 0,
+                explanation: "The LogMessage action allows logging custom information to the Service Center logs for debugging and monitoring purposes."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "What information is included in error log entries?",
+                options: [
+                    "Only error messages",
+                    "Error message, stack trace, user info, and session details",
+                    "Error messages and timestamps only",
+                    "Error codes only"
+                ],
+                correct: 1,
+                explanation: "Error log entries include comprehensive information: error messages, stack traces, user information, session details, and timestamps."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "How do you handle exceptions that occur in Timer actions?",
+                options: [
+                    "Timers cannot have exceptions",
+                    "Use exception handling within the Timer action",
+                    "Exceptions are automatically ignored",
+                    "Stop the timer permanently"
+                ],
+                correct: 1,
+                explanation: "Timer actions should include proper exception handling to manage errors gracefully and ensure continued execution."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "What is the purpose of the Security Exception?",
+                options: [
+                    "To handle network issues",
+                    "To handle unauthorized access and permission violations",
+                    "To handle database errors",
+                    "To handle validation errors"
+                ],
+                correct: 1,
+                explanation: "Security Exceptions are raised when users attempt unauthorized access or when permission violations occur."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "How do you configure different log levels in OutSystems?",
+                options: [
+                    "In Service Studio preferences",
+                    "In Service Center Factory Configuration",
+                    "Log levels are fixed",
+                    "Using web.config files"
+                ],
+                correct: 1,
+                explanation: "Log levels and configurations are managed through Service Center's Factory Configuration settings."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "What happens to unhandled exceptions in background processes?",
+                options: [
+                    "They are ignored",
+                    "They are logged but don't affect other processes",
+                    "They crash the entire application",
+                    "They are automatically retried"
+                ],
+                correct: 1,
+                explanation: "Unhandled exceptions in background processes are logged for analysis but don't affect other running processes."
+            },
+            {
+                topic: "Error Handling and Logging",
+                question: "How do you implement retry logic for external service calls?",
+                options: [
+                    "Retry is automatic",
+                    "Use exception handling with loop logic and counters",
+                    "Retry is not possible",
+                    "Use only timeout settings"
+                ],
+                correct: 1,
+                explanation: "Retry logic is implemented using exception handling combined with loop structures and retry counters."
+            },
+            
+            // Performance Optimization Questions (12 questions)
+            {
+                topic: "Performance Optimization",
+                question: "What is the recommended approach for optimizing Aggregate performance?",
+                options: [
+                    "Always fetch all records",
+                    "Use filters, indexes, and limit result sets with Max Records",
+                    "Use only SQL queries",
+                    "Performance cannot be optimized"
+                ],
+                correct: 1,
+                explanation: "Aggregate performance is optimized through proper filtering, database indexes, and limiting result sets using Max Records."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "When should you use SQL queries instead of Aggregates?",
+                options: [
+                    "Always use SQL",
+                    "For complex operations that Aggregates cannot handle efficiently",
+                    "Never use SQL",
+                    "Only for INSERT operations"
+                ],
+                correct: 1,
+                explanation: "SQL queries should be used for complex operations, advanced joins, or database-specific functions that Aggregates cannot handle efficiently."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "How do you identify performance bottlenecks in OutSystems applications?",
+                options: [
+                    "Guess based on user complaints",
+                    "Use Service Center Analytics to monitor slow queries and actions",
+                    "Performance monitoring is not available",
+                    "Use external tools only"
+                ],
+                correct: 1,
+                explanation: "Service Center Analytics provides detailed performance monitoring, identifying slow queries, actions, and overall application performance."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "What is the impact of fetching large result sets on application performance?",
+                options: [
+                    "No impact",
+                    "Increases memory usage and response times",
+                    "Improves performance",
+                    "Only affects database performance"
+                ],
+                correct: 1,
+                explanation: "Large result sets increase memory consumption, network transfer time, and processing time, degrading overall performance."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "How do you optimize database queries in OutSystems?",
+                options: [
+                    "Queries are automatically optimized",
+                    "Use proper indexes, filters, and avoid unnecessary joins",
+                    "Optimization is not possible",
+                    "Use more complex queries"
+                ],
+                correct: 1,
+                explanation: "Database query optimization involves creating proper indexes, using effective filters, and avoiding unnecessary joins and calculations."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "What is the purpose of database indexes in OutSystems?",
+                options: [
+                    "To store additional data",
+                    "To speed up data retrieval operations",
+                    "To prevent data corruption",
+                    "Indexes are not supported"
+                ],
+                correct: 1,
+                explanation: "Database indexes dramatically improve data retrieval performance by creating optimized data structures for quick searches."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "How do you handle large file uploads efficiently?",
+                options: [
+                    "Upload everything to memory",
+                    "Use streaming uploads and progress indicators",
+                    "Limit file sizes severely",
+                    "File uploads cannot be optimized"
+                ],
+                correct: 1,
+                explanation: "Large file uploads should use streaming mechanisms and progress indicators to avoid memory issues and improve user experience."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "What caching mechanisms are available in OutSystems?",
+                options: [
+                    "No caching available",
+                    "Application caching, database connection pooling, and browser caching",
+                    "Only browser caching",
+                    "Manual caching only"
+                ],
+                correct: 1,
+                explanation: "OutSystems provides multiple caching layers including application-level caching, database connection pooling, and browser caching optimization."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "How do you optimize Client Actions in Reactive Web Apps?",
+                options: [
+                    "Client Actions cannot be optimized",
+                    "Minimize DOM manipulations and use efficient algorithms",
+                    "Use only Server Actions",
+                    "Optimization is automatic"
+                ],
+                correct: 1,
+                explanation: "Client Action optimization involves minimizing DOM manipulations, using efficient algorithms, and avoiding unnecessary processing."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "What is the impact of having too many widgets on a single screen?",
+                options: [
+                    "No impact",
+                    "Increases page load time and memory usage",
+                    "Improves performance",
+                    "Only affects mobile devices"
+                ],
+                correct: 1,
+                explanation: "Too many widgets increase HTML complexity, page load time, memory usage, and can degrade user experience, especially on mobile devices."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "How do you optimize image loading in OutSystems applications?",
+                options: [
+                    "Use only large images",
+                    "Optimize image sizes, formats, and implement lazy loading",
+                    "Images cannot be optimized",
+                    "Use text instead of images"
+                ],
+                correct: 1,
+                explanation: "Image optimization includes using appropriate sizes and formats, implementing lazy loading, and optimizing image compression."
+            },
+            {
+                topic: "Performance Optimization",
+                question: "What is the recommended approach for handling real-time data updates?",
+                options: [
+                    "Refresh the entire page",
+                    "Use efficient data refresh patterns and partial updates",
+                    "Real-time updates are not supported",
+                    "Use polling every second"
+                ],
+                correct: 1,
+                explanation: "Real-time updates should use efficient patterns like targeted data refreshes, WebSockets when available, and optimized polling intervals."
+            },
+            
+            // Security Best Practices Questions (10 questions)
+            {
+                topic: "Security Best Practices",
+                question: "How should sensitive data be stored in OutSystems applications?",
+                options: [
+                    "In plain text for easy access",
+                    "Using encryption and secure storage practices",
+                    "In client-side variables",
+                    "Sensitive data cannot be stored"
+                ],
+                correct: 1,
+                explanation: "Sensitive data should be encrypted, stored securely on the server side, and accessed through proper authentication and authorization mechanisms."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "What is the principle of least privilege in OutSystems security?",
+                options: [
+                    "Give all users maximum permissions",
+                    "Grant users only the minimum permissions needed for their role",
+                    "Security is automatically managed",
+                    "All users should have the same permissions"
+                ],
+                correct: 1,
+                explanation: "Least privilege means granting users only the minimum permissions necessary to perform their job functions, reducing security risks."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "How do you prevent SQL injection attacks in OutSystems?",
+                options: [
+                    "SQL injection is not possible",
+                    "Use parameterized queries and avoid dynamic SQL construction",
+                    "Use only stored procedures",
+                    "Validate input length only"
+                ],
+                correct: 1,
+                explanation: "SQL injection is prevented by using parameterized queries (Aggregates) and avoiding dynamic SQL string construction with user input."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "What input validation should be performed on user data?",
+                options: [
+                    "No validation needed",
+                    "Both client-side and server-side validation",
+                    "Only client-side validation",
+                    "Only server-side validation"
+                ],
+                correct: 1,
+                explanation: "Both client-side (for user experience) and server-side (for security) validation should be implemented to ensure data integrity and security."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "How do you implement secure session management?",
+                options: [
+                    "Sessions are automatically secure",
+                    "Use HTTPS, secure session timeouts, and proper session invalidation",
+                    "Store session data in local storage",
+                    "Sessions are not needed"
+                ],
+                correct: 1,
+                explanation: "Secure session management requires HTTPS, appropriate session timeouts, secure session invalidation, and protection against session hijacking."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "What is Cross-Site Scripting (XSS) and how is it prevented in OutSystems?",
+                options: [
+                    "XSS is not a concern in OutSystems",
+                    "XSS involves injecting malicious scripts; prevented by output encoding",
+                    "XSS only affects external websites",
+                    "XSS is automatically prevented"
+                ],
+                correct: 1,
+                explanation: "XSS attacks inject malicious scripts into web pages. OutSystems helps prevent XSS through automatic output encoding and input validation."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "How should API authentication be implemented?",
+                options: [
+                    "No authentication needed for APIs",
+                    "Use secure authentication methods like API keys, OAuth, or tokens",
+                    "Use only username/password",
+                    "Authentication is optional"
+                ],
+                correct: 1,
+                explanation: "API authentication should use secure methods like API keys, OAuth tokens, or JWT tokens with proper expiration and scope control."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "What is the recommended approach for handling user passwords?",
+                options: [
+                    "Store passwords in plain text",
+                    "Use strong hashing algorithms and never store plain text passwords",
+                    "Encrypt passwords with reversible encryption",
+                    "Passwords are not needed"
+                ],
+                correct: 1,
+                explanation: "Passwords should be hashed using strong, one-way hashing algorithms and never stored in plain text or with reversible encryption."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "How do you implement secure file upload functionality?",
+                options: [
+                    "Accept all file types",
+                    "Validate file types, scan for malware, and limit file sizes",
+                    "File uploads are automatically secure",
+                    "Store files in the database only"
+                ],
+                correct: 1,
+                explanation: "Secure file uploads require file type validation, malware scanning, size limits, and secure storage with proper access controls."
+            },
+            {
+                topic: "Security Best Practices",
+                question: "What logging should be implemented for security monitoring?",
+                options: [
+                    "No logging needed",
+                    "Log authentication attempts, authorization failures, and security events",
+                    "Log only successful operations",
+                    "Logging is automatic"
+                ],
+                correct: 1,
+                explanation: "Security logging should include authentication attempts, authorization failures, suspicious activities, and security-related events for monitoring and forensics."
+            },
+            
+            // Timer Actions Questions (8 questions)
+            {
+                topic: "Timer Actions",
+                question: "What is the purpose of Timer Actions in OutSystems?",
+                options: [
+                    "To display time on screens",
+                    "To execute scheduled background tasks",
+                    "To measure performance",
+                    "To handle user timeouts"
+                ],
+                correct: 1,
+                explanation: "Timer Actions execute scheduled background tasks like data processing, cleanup operations, and integration synchronization."
+            },
+            {
+                topic: "Timer Actions",
+                question: "How do you schedule a Timer to run daily at a specific time?",
+                options: [
+                    "Set Schedule to Daily and specify the time",
+                    "Use hourly schedule only",
+                    "Timers cannot be scheduled",
+                    "Use manual triggers only"
+                ],
+                correct: 0,
+                explanation: "Daily timers are configured by setting the Schedule property to Daily and specifying the exact time of execution."
+            },
+            {
+                topic: "Timer Actions",
+                question: "What happens if a Timer Action takes longer than expected to execute?",
+                options: [
+                    "The application crashes",
+                    "The timer may be marked as stuck and monitoring alerts may trigger",
+                    "Nothing happens",
+                    "The timer automatically restarts"
+                ],
+                correct: 1,
+                explanation: "Long-running timers may be flagged as stuck in Service Center monitoring, and administrators can receive alerts about performance issues."
+            },
+            {
+                topic: "Timer Actions",
+                question: "How do you handle errors in Timer Actions?",
+                options: [
+                    "Errors are automatically ignored",
+                    "Use exception handling and proper error logging",
+                    "Timers cannot have errors",
+                    "Stop the timer permanently"
+                ],
+                correct: 1,
+                explanation: "Timer Actions should include comprehensive exception handling and error logging to ensure reliability and debugging capability."
+            },
+            {
+                topic: "Timer Actions",
+                question: "Can Timer Actions access database data?",
+                options: [
+                    "No, timers are isolated",
+                    "Yes, timers can use Aggregates and database operations",
+                    "Only read operations are allowed",
+                    "Database access requires special permissions"
+                ],
+                correct: 1,
+                explanation: "Timer Actions have full access to database operations including Aggregates, Entity Actions, and SQL queries."
+            },
+            {
+                topic: "Timer Actions",
+                question: "How do you monitor Timer execution in OutSystems?",
+                options: [
+                    "Monitoring is not available",
+                    "Use Service Center to view timer logs and execution history",
+                    "Use external monitoring tools only",
+                    "Check database tables manually"
+                ],
+                correct: 1,
+                explanation: "Service Center provides comprehensive timer monitoring including execution logs, performance metrics, and error tracking."
+            },
+            {
+                topic: "Timer Actions",
+                question: "What is the minimum interval for recurring Timers?",
+                options: [
+                    "1 second",
+                    "1 minute",
+                    "1 hour",
+                    "1 day"
+                ],
+                correct: 1,
+                explanation: "The minimum interval for recurring timers is 1 minute to prevent excessive system load from frequent executions."
+            },
+            {
+                topic: "Timer Actions",
+                question: "How do you prevent multiple instances of the same Timer from running simultaneously?",
+                options: [
+                    "Use Timer locking mechanisms",
+                    "OutSystems automatically prevents concurrent execution",
+                    "Concurrent execution is always allowed",
+                    "Use manual scheduling only"
+                ],
+                correct: 1,
+                explanation: "OutSystems automatically prevents multiple instances of the same timer from running concurrently to avoid conflicts and resource issues."
+            },
+            
+            // Web Service Integration Questions (8 questions)
+            {
+                topic: "Web Service Integration",
+                question: "What types of web services can OutSystems consume?",
+                options: [
+                    "Only SOAP services",
+                    "SOAP and REST web services",
+                    "Only REST services",
+                    "No web services supported"
+                ],
+                correct: 1,
+                explanation: "OutSystems can consume both SOAP web services (using WSDL) and REST APIs with various authentication methods."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "How do you handle authentication when consuming web services?",
+                options: [
+                    "Authentication is not supported",
+                    "Configure authentication in the web service properties or use OnBeforeRequest",
+                    "Use only anonymous access",
+                    "Authentication is automatic"
+                ],
+                correct: 1,
+                explanation: "Web service authentication is configured through service properties or customized using OnBeforeRequest callbacks for complex scenarios."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "What is the purpose of the OnBeforeRequest callback in web service consumption?",
+                options: [
+                    "To handle responses",
+                    "To customize requests before they are sent",
+                    "To log service calls",
+                    "OnBeforeRequest is not available"
+                ],
+                correct: 1,
+                explanation: "OnBeforeRequest allows customization of HTTP requests including headers, authentication, and request modification before sending."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "How do you handle timeout scenarios in web service calls?",
+                options: [
+                    "Timeouts are not configurable",
+                    "Set timeout values and implement exception handling",
+                    "Web services never timeout",
+                    "Use infinite timeouts"
+                ],
+                correct: 1,
+                explanation: "Timeout handling involves configuring appropriate timeout values and implementing exception handling for timeout scenarios."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "What data format is typically used for REST API communication?",
+                options: [
+                    "XML only",
+                    "JSON primarily, with XML support",
+                    "Binary only",
+                    "Plain text only"
+                ],
+                correct: 1,
+                explanation: "REST APIs primarily use JSON for data exchange, though XML and other formats are also supported depending on the service."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "How do you test web service integrations during development?",
+                options: [
+                    "Testing is not possible",
+                    "Use the integrated testing tools in Service Studio",
+                    "Deploy and test manually only",
+                    "Use external tools only"
+                ],
+                correct: 1,
+                explanation: "Service Studio provides integrated testing tools that allow testing web service calls with sample data during development."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "What should you do when a web service response structure changes?",
+                options: [
+                    "Ignore the changes",
+                    "Refresh the web service reference to update structures",
+                    "Create new web service references",
+                    "Changes are handled automatically"
+                ],
+                correct: 1,
+                explanation: "When web service structures change, refresh the service reference to update the local structures and maintain compatibility."
+            },
+            {
+                topic: "Web Service Integration",
+                question: "How do you handle large response payloads from web services?",
+                options: [
+                    "Load everything into memory",
+                    "Use streaming and pagination when available",
+                    "Large payloads are not supported",
+                    "Responses are automatically optimized"
+                ],
+                correct: 1,
+                explanation: "Large payloads should be handled using streaming techniques, pagination, or chunked processing to avoid memory issues."
+            },
+            
+            // Final Questions - Mixed Advanced Topics (14 questions)
+            {
+                topic: "Advanced Development",
+                question: "What is the purpose of the Extension mechanism in OutSystems?",
+                options: [
+                    "To extend disk space",
+                    "To integrate external .NET code and libraries",
+                    "To extend user licenses",
+                    "Extensions are not supported"
+                ],
+                correct: 1,
+                explanation: "Extensions allow integration of external .NET code and libraries when OutSystems built-in functionality is insufficient."
+            },
+            {
+                topic: "Advanced Development",
+                question: "How do you implement custom business logic that cannot be achieved with standard OutSystems elements?",
+                options: [
+                    "It's not possible",
+                    "Use Extensions or advanced Server Actions",
+                    "Use only client-side JavaScript",
+                    "Modify the OutSystems platform"
+                ],
+                correct: 1,
+                explanation: "Complex business logic is implemented using Extensions for .NET integration or advanced Server Action patterns."
+            },
+            {
+                topic: "Mobile Development",
+                question: "What is the difference between Responsive and Mobile App development in OutSystems?",
+                options: [
+                    "No difference",
+                    "Responsive adapts to screen sizes, Mobile Apps are native mobile applications",
+                    "Mobile Apps are faster",
+                    "Responsive is for mobile only"
+                ],
+                correct: 1,
+                explanation: "Responsive apps adapt to different screen sizes in browsers, while Mobile Apps are packaged as native mobile applications."
+            },
+            {
+                topic: "Mobile Development",
+                question: "How do you access device features in OutSystems Mobile Apps?",
+                options: [
+                    "Device features are not accessible",
+                    "Use built-in plugins and client actions",
+                    "Only through web APIs",
+                    "Requires custom development only"
+                ],
+                correct: 1,
+                explanation: "OutSystems provides built-in plugins and client actions to access device features like camera, GPS, and storage."
+            },
+            {
+                topic: "Advanced Data",
+                question: "When should you use Advanced Queries instead of Aggregates?",
+                options: [
+                    "Always use Advanced Queries",
+                    "For complex SQL operations that Aggregates cannot handle",
+                    "Never use Advanced Queries",
+                    "Only for data insertion"
+                ],
+                correct: 1,
+                explanation: "Advanced Queries are used for complex SQL operations, database-specific functions, or operations that exceed Aggregate capabilities."
+            },
+            {
+                topic: "Advanced Data",
+                question: "How do you implement database transactions in OutSystems?",
+                options: [
+                    "Transactions are automatic",
+                    "Use the Transaction scope in action flows",
+                    "Transactions are not supported",
+                    "Manual transaction management only"
+                ],
+                correct: 1,
+                explanation: "Database transactions are implemented using Transaction scopes in action flows to ensure data consistency."
+            },
+            {
+                topic: "Architecture",
+                question: "What is the recommended approach for organizing large OutSystems applications?",
+                options: [
+                    "Use a single large module",
+                    "Split into multiple modules with clear responsibilities",
+                    "Create separate applications for each feature",
+                    "Organization doesn't matter"
+                ],
+                correct: 1,
+                explanation: "Large applications should be split into multiple modules with clear responsibilities, promoting reusability and maintainability."
+            },
+            {
+                topic: "Architecture",
+                question: "How do you manage dependencies between modules in a large application?",
+                options: [
+                    "Create circular dependencies",
+                    "Minimize dependencies and use clear interfaces",
+                    "Make everything public",
+                    "Avoid using multiple modules"
+                ],
+                correct: 1,
+                explanation: "Dependencies should be minimized and managed through clear, well-defined public interfaces between modules."
+            },
+            {
+                topic: "Deployment",
+                question: "What is a Deployment Plan in OutSystems?",
+                options: [
+                    "A project timeline",
+                    "A package of applications and configurations for deployment across environments",
+                    "A testing strategy",
+                    "A backup procedure"
+                ],
+                correct: 1,
+                explanation: "Deployment Plans package applications, configurations, and dependencies for coordinated deployment across environments."
+            },
+            {
+                topic: "Deployment",
+                question: "How do you handle environment-specific configurations?",
+                options: [
+                    "Hard-code values in applications",
+                    "Use Site Properties and environment-specific settings",
+                    "Create separate applications for each environment",
+                    "Configuration is automatic"
+                ],
+                correct: 1,
+                explanation: "Environment-specific configurations are managed using Site Properties and environment-specific settings in Service Center."
+            },
+            {
+                topic: "Monitoring",
+                question: "What key metrics should you monitor in production OutSystems applications?",
+                options: [
+                    "Only error counts",
+                    "Performance, errors, user activity, and resource usage",
+                    "Only user activity",
+                    "Monitoring is not necessary"
+                ],
+                correct: 1,
+                explanation: "Production monitoring should include performance metrics, error rates, user activity patterns, and resource utilization."
+            },
+            {
+                topic: "Monitoring",
+                question: "How do you set up alerts for critical application issues?",
+                options: [
+                    "Alerts are automatic",
+                    "Configure monitoring and alerting rules in Service Center",
+                    "Use external tools only",
+                    "Manual monitoring only"
+                ],
+                correct: 1,
+                explanation: "Alerts are configured through Service Center monitoring settings and can integrate with external monitoring systems."
+            },
+            {
+                topic: "Best Practices",
+                question: "What is the recommended naming convention for OutSystems elements?",
+                options: [
+                    "Use random names",
+                    "Use clear, descriptive names that indicate purpose and follow consistent patterns",
+                    "Use only numbers",
+                    "Naming doesn't matter"
+                ],
+                correct: 1,
+                explanation: "Element names should be clear, descriptive, and follow consistent naming patterns to improve code readability and maintenance."
+            },
+            {
+                topic: "Best Practices",
+                question: "How should you document your OutSystems applications?",
+                options: [
+                    "Documentation is not necessary",
+                    "Use descriptions, comments, and maintain external documentation",
+                    "Code is self-documenting",
+                    "Document only after completion"
+                ],
+                correct: 1,
+                explanation: "Proper documentation includes element descriptions, inline comments, and external documentation for complex business logic and architecture decisions."
             }
-            // Continue with more questions to reach 250...
         ];
 
         let currentQuestion = 0;
@@ -2845,6 +4946,17 @@
             quizCompleted = true;
             const percentage = Math.round((score / questions.length) * 100);
             
+            // Calculate wrong answers by topic
+            const wrongAnswersByTopic = {};
+            questions.forEach((question, index) => {
+                if (answers[index] !== question.correct) {
+                    if (!wrongAnswersByTopic[question.topic]) {
+                        wrongAnswersByTopic[question.topic] = 0;
+                    }
+                    wrongAnswersByTopic[question.topic]++;
+                }
+            });
+            
             // Hide quiz content
             document.getElementById('quizContent').style.display = 'none';
             document.querySelector('.progress-container').style.display = 'none';
@@ -2880,7 +4992,17 @@
             
             scoreCircle.className = `score-circle ${scoreClass}`;
             scoreText.textContent = `${scoreTextContent} You scored ${score} out of ${questions.length}`;
-            scoreDescription.textContent = scoreDescriptionContent;
+            
+            // Add topic breakdown if there are wrong answers
+            if (Object.keys(wrongAnswersByTopic).length > 0) {
+                const topicBreakdown = Object.entries(wrongAnswersByTopic)
+                    .sort((a, b) => b[1] - a[1])
+                    .map(([topic, count]) => `${topic} (${count} wrong)`)
+                    .join(', ');
+                scoreDescriptionContent += `<br><br><strong>Areas to review:</strong> ${topicBreakdown}`;
+            }
+            
+            scoreDescription.innerHTML = scoreDescriptionContent;
             
             resultsContainer.classList.add('show');
         }
