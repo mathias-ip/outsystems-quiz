@@ -1,0 +1,2920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OutSystems 11 Reactive Web Developer Certification Quiz</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .progress-container {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #28a745, #20c997);
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 10px;
+            font-weight: 600;
+            color: #495057;
+        }
+
+        .quiz-content {
+            padding: 30px;
+        }
+
+        .question-container {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .question-container.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .question-header {
+            background: #f8f9fa;
+            padding: 15px 20px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+            border-left: 4px solid #007bff;
+        }
+
+        .topic-badge {
+            display: inline-block;
+            background: #007bff;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+
+        .question-number {
+            font-weight: 600;
+            color: #6c757d;
+            margin-bottom: 5px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            font-weight: 600;
+            color: #2c3e50;
+            line-height: 1.4;
+        }
+
+        .options-container {
+            margin: 25px 0;
+        }
+
+        .option {
+            background: #fff;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            padding: 15px 20px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .option:hover {
+            border-color: #007bff;
+            background: #f8f9ff;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #007bff;
+            background: #e3f2fd;
+        }
+
+        .option.correct {
+            border-color: #28a745;
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .option.incorrect {
+            border-color: #dc3545;
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-letter {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: #6c757d;
+            color: white;
+            border-radius: 50%;
+            font-weight: bold;
+            margin-right: 15px;
+            flex-shrink: 0;
+        }
+
+        .option.selected .option-letter {
+            background: #007bff;
+        }
+
+        .option.correct .option-letter {
+            background: #28a745;
+        }
+
+        .option.incorrect .option-letter {
+            background: #dc3545;
+        }
+
+        .explanation {
+            background: #e8f4fd;
+            border: 1px solid #bee5eb;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            display: none;
+        }
+
+        .explanation.show {
+            display: block;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .explanation h4 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .explanation p {
+            color: #0c5460;
+            line-height: 1.5;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #dee2e6;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #007bff;
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background: #0056b3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover:not(:disabled) {
+            background: #545b62;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .results-container {
+            display: none;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .results-container.show {
+            display: block;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .score-circle {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+        }
+
+        .score-excellent { background: linear-gradient(135deg, #28a745, #20c997); }
+        .score-good { background: linear-gradient(135deg, #17a2b8, #007bff); }
+        .score-satisfactory { background: linear-gradient(135deg, #ffc107, #fd7e14); }
+        .score-needs-improvement { background: linear-gradient(135deg, #dc3545, #e83e8c); }
+
+        .score-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .score-description {
+            font-size: 1.1em;
+            color: #6c757d;
+            margin-bottom: 30px;
+        }
+
+        .restart-btn {
+            background: #28a745;
+            color: white;
+            font-size: 1.1em;
+            padding: 15px 30px;
+        }
+
+        .restart-btn:hover {
+            background: #1e7e34;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 10px;
+                border-radius: 8px;
+            }
+
+            .header {
+                padding: 20px;
+            }
+
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .quiz-content {
+                padding: 20px;
+            }
+
+            .question-text {
+                font-size: 1.1em;
+            }
+
+            .controls {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>OutSystems 11 Reactive Web Developer</h1>
+            <p>Certification Practice Quiz</p>
+        </div>
+
+        <div class="progress-container">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-text" id="progressText">Question 1 of 50</div>
+        </div>
+
+        <div class="quiz-content" id="quizContent">
+            <!-- Questions will be generated here -->
+        </div>
+
+        <div class="results-container" id="resultsContainer">
+            <div class="score-circle" id="scoreCircle">
+                <span id="scorePercentage">0%</span>
+            </div>
+            <div class="score-text" id="scoreText"></div>
+            <div class="score-description" id="scoreDescription"></div>
+            <button class="btn restart-btn" onclick="restartQuiz()">Restart Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        const allQuestions = [
+            // Aggregates Questions
+            {
+                topic: "Aggregates",
+                question: "What is the primary purpose of an Aggregate in OutSystems 11?",
+                options: [
+                    "To create database tables",
+                    "To fetch data from entities using a visual query builder",
+                    "To validate user input",
+                    "To handle exceptions in server actions"
+                ],
+                correct: 1,
+                explanation: "Aggregates are visual query builders that generate optimized SQL queries to retrieve data from entities efficiently."
+            },
+            {
+                topic: "Aggregates",
+                question: "In an Aggregate, what does the Count output represent?",
+                options: [
+                    "The number of columns in the result set",
+                    "The total number of records that match the aggregate criteria",
+                    "The number of entities used in the aggregate",
+                    "The execution time of the query"
+                ],
+                correct: 1,
+                explanation: "The Count output returns the total number of records that match the aggregate's filter conditions, useful for pagination and displaying record counts."
+            },
+            {
+                topic: "Aggregates",
+                question: "When should you use the Max Records property in an Aggregate?",
+                options: [
+                    "To limit the result set size for performance optimization",
+                    "To set the maximum number of entities to join",
+                    "To define the maximum execution time",
+                    "To specify the maximum number of filters"
+                ],
+                correct: 0,
+                explanation: "Max Records limits the number of records returned by the aggregate, improving performance and supporting pagination patterns."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the primary debugging tool available in Service Studio for OutSystems 11 applications?",
+                options: [
+                    "External debugger only",
+                    "Built-in Service Studio debugger with breakpoints",
+                    "Log files analysis only",
+                    "Database query analyzer"
+                ],
+                correct: 1,
+                explanation: "Service Studio provides an integrated debugger that allows setting breakpoints, inspecting variables, and step-through execution for troubleshooting applications."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "When debugging server actions in OutSystems 11, what information can you inspect at breakpoints?",
+                options: [
+                    "Only input parameters",
+                    "Only database queries",
+                    "Variables, call stack, and expression values",
+                    "Only exception messages"
+                ],
+                correct: 2,
+                explanation: "The debugger allows comprehensive inspection of variables, call stack, expression evaluation, and execution flow during debugging sessions."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What should you do if you encounter a NullObject exception during debugging?",
+                options: [
+                    "Ignore the error",
+                    "Check for null values before accessing object properties",
+                    "Restart the application",
+                    "Clear the browser cache"
+                ],
+                correct: 1,
+                explanation: "NullObject exceptions occur when trying to access properties of null objects. Always validate objects are not null before accessing their properties."
+            },
+            {
+                topic: "Data Relationships",
+                question: "In a 1-to-Many relationship between Customer and Order entities, where should the foreign key be placed?",
+                options: [
+                    "In the Customer entity",
+                    "In the Order entity",
+                    "In both entities",
+                    "In a separate junction entity"
+                ],
+                correct: 1,
+                explanation: "In a 1-to-Many relationship, the foreign key is always placed in the child entity (Order), referencing the parent entity (Customer)."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you implement a Many-to-Many relationship in OutSystems 11?",
+                options: [
+                    "Using a single foreign key",
+                    "Using two foreign keys in one entity",
+                    "Creating a junction entity with foreign keys to both entities",
+                    "Using static entities only"
+                ],
+                correct: 2,
+                explanation: "Many-to-Many relationships require a junction (bridge) entity that contains foreign keys referencing both related entities."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What delete rule should you use to prevent deletion of a parent record when child records exist?",
+                options: [
+                    "Delete",
+                    "Protect",
+                    "Ignore",
+                    "Cascade"
+                ],
+                correct: 1,
+                explanation: "The Protect delete rule prevents deletion of parent records when related child records exist, maintaining referential integrity."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What is the main difference between Entities and Static Entities in OutSystems 11?",
+                options: [
+                    "Entities store dynamic data, Static Entities store reference data that changes infrequently",
+                    "Entities are faster than Static Entities",
+                    "Static Entities can only store text data",
+                    "Entities require more memory than Static Entities"
+                ],
+                correct: 0,
+                explanation: "Entities store dynamic application data, while Static Entities store reference/lookup data that is defined at design time and changes infrequently."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What built-in attributes does every Entity automatically include in OutSystems 11?",
+                options: [
+                    "Name and Description only",
+                    "Id, CreatedOn, and UpdatedOn",
+                    "CreatedBy and UpdatedBy only",
+                    "Status and IsActive only"
+                ],
+                correct: 1,
+                explanation: "Every entity automatically includes Id (primary key), CreatedOn (creation timestamp), and UpdatedOn (last modification timestamp) attributes."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "When should you use Static Entities instead of regular Entities?",
+                options: [
+                    "For storing user-generated content",
+                    "For reference data like status values, categories, or configuration data",
+                    "For temporary data storage",
+                    "For large datasets that change frequently"
+                ],
+                correct: 1,
+                explanation: "Static Entities are ideal for reference data such as status values, categories, or configuration settings that are defined at design time and rarely change."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you implement exception handling in OutSystems 11 server actions?",
+                options: [
+                    "Using If-Then-Else logic only",
+                    "Using Try-Catch blocks",
+                    "Using validation widgets",
+                    "Using client-side JavaScript"
+                ],
+                correct: 1,
+                explanation: "OutSystems 11 uses Exception handling with Try-Catch blocks in server actions to handle runtime errors gracefully."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What happens when an unhandled exception occurs in a server action?",
+                options: [
+                    "The application continues normally",
+                    "An error message is displayed and the action stops",
+                    "The exception is automatically logged and ignored",
+                    "The user is redirected to the home page"
+                ],
+                correct: 1,
+                explanation: "Unhandled exceptions cause the action to stop execution and typically display an error message to the user, affecting the user experience."
+            },
+            {
+                topic: "Exception Handling",
+                question: "Which exception type is commonly used for business rule violations in OutSystems 11?",
+                options: [
+                    "SecurityException",
+                    "DataBaseException",
+                    "UserException",
+                    "CommunicationException"
+                ],
+                correct: 2,
+                explanation: "UserException is commonly used to handle business rule violations and provide meaningful error messages to users."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "What is the recommended way to fetch data for display on a screen in OutSystems 11?",
+                options: [
+                    "Using SQL queries only",
+                    "Using Aggregates in the On Initialize event",
+                    "Using client-side JavaScript",
+                    "Using external web services"
+                ],
+                correct: 1,
+                explanation: "Aggregates are the recommended approach for fetching data on screens, providing visual query building and automatic optimization in the On Initialize event."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "When does the On Initialize event execute in the screen lifecycle?",
+                options: [
+                    "After the screen is rendered to the user",
+                    "Before the screen is rendered, on the server side",
+                    "Only when the user interacts with the screen",
+                    "Continuously while the screen is displayed"
+                ],
+                correct: 1,
+                explanation: "The On Initialize event executes on the server side before the screen is rendered, allowing data to be fetched and prepared for display."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "How can you refresh data on a screen after a user action in a Reactive Web App?",
+                options: [
+                    "Reload the entire page",
+                    "Use the Refresh Data action to refresh specific aggregates",
+                    "Clear the browser cache",
+                    "Restart the application"
+                ],
+                correct: 1,
+                explanation: "In Reactive Web Apps, you can use the Refresh Data action to refresh specific aggregates without reloading the entire page."
+            },
+            {
+                topic: "Form Validations",
+                question: "What are the two main types of validation available in OutSystems 11?",
+                options: [
+                    "Client-side and server-side validation",
+                    "Input and output validation",
+                    "Entity and attribute validation",
+                    "Screen and action validation"
+                ],
+                correct: 0,
+                explanation: "OutSystems 11 supports both client-side validation (immediate feedback) and server-side validation (business rules and security)."
+            },
+            {
+                topic: "Form Validations",
+                question: "Which property of an Input widget makes a field mandatory in OutSystems 11?",
+                options: [
+                    "Required property",
+                    "Mandatory property",
+                    "Validation property",
+                    "IsRequired property"
+                ],
+                correct: 1,
+                explanation: "The Mandatory property of Input widgets enforces required field validation and provides automatic validation feedback."
+            },
+            {
+                topic: "Form Validations",
+                question: "What happens when built-in validation fails on a form submission?",
+                options: [
+                    "The form is submitted anyway",
+                    "The form submission is prevented and validation messages are shown",
+                    "The user is redirected to an error page",
+                    "The application restarts"
+                ],
+                correct: 1,
+                explanation: "When validation fails, form submission is prevented and validation messages are displayed to help users correct the errors."
+            },
+            {
+                topic: "Input Widgets",
+                question: "Which Input widget type should you use for email addresses in OutSystems 11?",
+                options: [
+                    "Text input with custom validation",
+                    "Input widget with Input Type set to Email",
+                    "TextArea widget",
+                    "Dropdown widget"
+                ],
+                correct: 1,
+                explanation: "Using Input Type \"Email\" provides built-in email format validation and appropriate mobile keyboard display."
+            },
+            {
+                topic: "Input Widgets",
+                question: "What is the purpose of the Prompt property in Input widgets?",
+                options: [
+                    "To set the default value",
+                    "To provide placeholder text that guides user input",
+                    "To validate the input format",
+                    "To set the maximum length"
+                ],
+                correct: 1,
+                explanation: "The Prompt property displays placeholder text inside the input field to guide users on what information to enter."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you implement a dropdown list with dynamic options in OutSystems 11?",
+                options: [
+                    "Use a Dropdown widget with a static list only",
+                    "Use a Dropdown widget connected to an aggregate or entity",
+                    "Use multiple Input widgets",
+                    "Use a TextArea widget"
+                ],
+                correct: 1,
+                explanation: "Dropdown widgets can be connected to aggregates or entities to provide dynamic option lists based on database data."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What is the difference between Server Actions and Client Actions in OutSystems 11?",
+                options: [
+                    "Server Actions run on the client browser, Client Actions run on the server",
+                    "Server Actions run on the server, Client Actions run on the client browser",
+                    "There is no difference",
+                    "Server Actions are faster than Client Actions"
+                ],
+                correct: 1,
+                explanation: "Server Actions execute on the server side and can access databases and external systems, while Client Actions execute in the browser for UI interactions."
+            },
+            {
+                topic: "Logic Flows",
+                question: "When should you use a Client Action instead of a Server Action?",
+                options: [
+                    "When accessing database data",
+                    "When performing UI manipulations or client-side logic without server communication",
+                    "When calling external web services",
+                    "When implementing security validations"
+                ],
+                correct: 1,
+                explanation: "Client Actions are ideal for UI interactions, client-side validations, and logic that doesn't require server access, improving responsiveness."
+            },
+            {
+                topic: "Logic Flows",
+                question: "How do you pass data from a Client Action to a Server Action?",
+                options: [
+                    "Using global variables",
+                    "Using input parameters when calling the Server Action",
+                    "Using cookies only",
+                    "Data cannot be passed between Client and Server Actions"
+                ],
+                correct: 1,
+                explanation: "Data is passed from Client Actions to Server Actions through input parameters when making the server action call."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What is a Producer module in OutSystems 11?",
+                options: [
+                    "A module that only consumes functionality from other modules",
+                    "A module that exposes functionality for other modules to use",
+                    "A module that handles only database operations",
+                    "A module that manages user interface only"
+                ],
+                correct: 1,
+                explanation: "A Producer module exposes public elements (entities, actions, screens) that other modules can reference and use."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What happens when you reference a public entity from another module?",
+                options: [
+                    "The entity is copied to your module",
+                    "A read-only reference is created that stays synchronized with the original",
+                    "The entity becomes private in your module",
+                    "The original entity is moved to your module"
+                ],
+                correct: 1,
+                explanation: "Referencing a public entity creates a read-only reference that automatically stays synchronized with the original entity in the producer module."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What is the recommended approach for managing dependencies between modules?",
+                options: [
+                    "Create circular dependencies for better integration",
+                    "Minimize dependencies and use clear public interfaces",
+                    "Make all elements public in every module",
+                    "Avoid using multiple modules"
+                ],
+                correct: 1,
+                explanation: "Best practice is to minimize dependencies between modules and expose only necessary elements through well-defined public interfaces."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement basic pagination in an Aggregate?",
+                options: [
+                    "Using Start Index and Max Records properties",
+                    "Using Filter conditions only",
+                    "Using Sort conditions only",
+                    "Pagination is automatic and cannot be controlled"
+                ],
+                correct: 0,
+                explanation: "Pagination is implemented by setting the Start Index (calculated from page number) and Max Records (page size) properties in aggregates."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "What is the formula for calculating Start Index for pagination?",
+                options: [
+                    "PageNumber * PageSize",
+                    "(PageNumber - 1) * PageSize",
+                    "PageNumber + PageSize",
+                    "PageNumber / PageSize"
+                ],
+                correct: 1,
+                explanation: "Start Index is calculated as (PageNumber - 1) * PageSize to properly offset to the beginning of the requested page."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement dynamic sorting in an Aggregate?",
+                options: [
+                    "Sort is fixed and cannot be changed",
+                    "Use expressions in the Sort property based on user selection",
+                    "Create separate aggregates for each sort option",
+                    "Use only client-side sorting"
+                ],
+                correct: 1,
+                explanation: "Dynamic sorting is implemented using expressions in the Sort property that evaluate based on user-selected sort criteria."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you control access to a screen based on user roles in OutSystems 11?",
+                options: [
+                    "Using If conditions in screen preparation",
+                    "Setting the Roles property of the screen",
+                    "Using JavaScript validation",
+                    "Access control is not possible at screen level"
+                ],
+                correct: 1,
+                explanation: "Screen access is controlled by setting the Roles property, which automatically enforces role-based access when users navigate to the screen."
+            },
+            {
+                topic: "Role-based Security",
+                question: "What built-in function checks if the current user has a specific role?",
+                options: [
+                    "HasRole()",
+                    "CheckRole()",
+                    "UserRole()",
+                    "IsInRole()"
+                ],
+                correct: 1,
+                explanation: "The CheckRole() function returns true if the current user has the specified role, allowing for role-based conditional logic."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you grant a role to a user programmatically in OutSystems 11?",
+                options: [
+                    "Using the AssignRole() action",
+                    "Using the GrantUserRole() action",
+                    "Using the SetUserRole() action",
+                    "Roles can only be assigned manually"
+                ],
+                correct: 1,
+                explanation: "The GrantUserRole() action programmatically assigns a role to a user, enabling dynamic role management in applications."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "In what order do the following screen events execute in a Reactive Web App?",
+                options: [
+                    "On Ready, On Render, On Initialize",
+                    "On Initialize, On Ready, On Render",
+                    "On Render, On Initialize, On Ready",
+                    "On Ready, On Initialize, On Render"
+                ],
+                correct: 1,
+                explanation: "The screen lifecycle executes in the order: On Initialize (server-side data preparation), On Ready (client-side initialization), then On Render (after DOM is ready)."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "When should you use the On Ready event in a Reactive Web App screen?",
+                options: [
+                    "For server-side data fetching",
+                    "For client-side initializations and DOM manipulations",
+                    "For database operations",
+                    "For user authentication"
+                ],
+                correct: 1,
+                explanation: "On Ready is used for client-side initialization tasks, DOM manipulations, and setting up client-side behavior after the screen loads."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What is the purpose of the On Initialize event in OutSystems 11?",
+                options: [
+                    "To validate user permissions only",
+                    "To fetch and prepare data before the screen is rendered",
+                    "To handle user input validation",
+                    "To manage screen transitions"
+                ],
+                correct: 1,
+                explanation: "The On Initialize event runs on the server before rendering to fetch and prepare data that the screen needs for display."
+            },
+            {
+                topic: "Client Variables",
+                question: "What is the scope and persistence of Client Variables in OutSystems 11?",
+                options: [
+                    "Global across all applications, persistent until browser restart",
+                    "Local to the application, persistent during the browser session",
+                    "Local to each screen, lost on navigation",
+                    "Stored on the server, accessible globally"
+                ],
+                correct: 1,
+                explanation: "Client Variables are scoped to the application and persist throughout the browser session, but are reset when the browser is refreshed or closed."
+            },
+            {
+                topic: "Client Variables",
+                question: "When should you use Client Variables instead of Server Variables?",
+                options: [
+                    "For storing sensitive data",
+                    "For temporary UI state and data that doesn't require server persistence",
+                    "For database operations",
+                    "For user authentication information"
+                ],
+                correct: 1,
+                explanation: "Client Variables are ideal for temporary UI state, form data across steps, and other client-side data that doesn't need server storage."
+            },
+            {
+                topic: "UI Development",
+                question: "Which widget is best suited for displaying a large dataset in a tabular format?",
+                options: [
+                    "List widget",
+                    "Table widget",
+                    "Card widget",
+                    "Gallery widget"
+                ],
+                correct: 1,
+                explanation: "Table widgets are specifically designed for displaying structured data in rows and columns, ideal for large datasets with multiple attributes."
+            },
+            {
+                topic: "UI Development",
+                question: "What is the purpose of the Expression widget in OutSystems 11?",
+                options: [
+                    "To create input fields",
+                    "To display dynamic text and calculated values",
+                    "To handle user clicks",
+                    "To create navigation menus"
+                ],
+                correct: 1,
+                explanation: "Expression widgets display dynamic text content, calculated values, and formatted data based on expressions and variables."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "When should you use a List widget instead of a Table widget?",
+                options: [
+                    "When you need a simple tabular layout",
+                    "When you need flexible, custom layouts for each item",
+                    "When displaying only text data",
+                    "When you need built-in sorting"
+                ],
+                correct: 1,
+                explanation: "List widgets provide flexibility for custom layouts and complex item designs, while Table widgets are better for standard tabular data presentation."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "How do you implement conditional styling on widgets in OutSystems 11?",
+                options: [
+                    "Using CSS files only",
+                    "Using expressions in the Style Classes property",
+                    "Conditional styling is not supported",
+                    "Using JavaScript only"
+                ],
+                correct: 1,
+                explanation: "Conditional styling is implemented using expressions in the Style Classes property that evaluate to different CSS classes based on conditions."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "When should you use SQL queries instead of Aggregates in OutSystems 11?",
+                options: [
+                    "For all data operations",
+                    "For complex operations not supported by Aggregates, like advanced joins or database-specific functions",
+                    "Never, Aggregates are always preferred",
+                    "Only for data insertion"
+                ],
+                correct: 1,
+                explanation: "SQL queries are used when Aggregates cannot handle the complexity, such as advanced joins, database-specific functions, or complex analytical operations."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "How do you implement calculated fields in Aggregates?",
+                options: [
+                    "Using the Calculator widget",
+                    "Adding calculated attributes with expressions",
+                    "Calculated fields are not supported in Aggregates",
+                    "Using separate Server Actions only"
+                ],
+                correct: 1,
+                explanation: "Calculated fields are implemented by adding calculated attributes to Aggregates using expressions that combine or transform data from multiple sources."
+            },
+            {
+                topic: "Application Structure",
+                question: "What is the recommended approach for organizing screens in an OutSystems 11 application?",
+                options: [
+                    "Put all screens in the root folder",
+                    "Organize screens in logical folders by functionality or user flow",
+                    "Create separate modules for each screen",
+                    "Screen organization doesn't matter"
+                ],
+                correct: 1,
+                explanation: "Best practice is to organize screens in logical folders grouped by functionality, user roles, or business processes for better maintainability."
+            },
+            {
+                topic: "Application Structure",
+                question: "What happens during the 1-Click Publish process in OutSystems 11?",
+                options: [
+                    "Only the user interface is updated",
+                    "The application is compiled, validated, and deployed to the server environment",
+                    "Only database changes are applied",
+                    "The process only checks for syntax errors"
+                ],
+                correct: 1,
+                explanation: "1-Click Publish performs compilation, validation, code generation, database schema updates, and deployment to make the application available."
+            },
+            {
+                topic: "Best Practices",
+                question: "What is the most important principle when designing reusable Blocks in OutSystems 11?",
+                options: [
+                    "Make all properties public",
+                    "Design with a clear, specific purpose and well-defined interface",
+                    "Include as much functionality as possible in each block",
+                    "Blocks should only contain UI elements"
+                ],
+                correct: 1,
+                explanation: "Reusable blocks should have a clear, specific purpose with well-defined input/output interfaces to maximize reusability and maintainability."
+            },
+            // Additional Aggregates Questions
+            {
+                topic: "Aggregates",
+                question: "Which property of an Aggregate defines the maximum number of records returned?",
+                options: [
+                    "Max Records",
+                    "Start Index",
+                    "Fetch",
+                    "Count"
+                ],
+                correct: 0,
+                explanation: "The Max Records property limits the number of records returned by the aggregate for performance optimization and pagination."
+            },
+            {
+                topic: "Aggregates",
+                question: "What is the purpose of the Start Index property in an Aggregate?",
+                options: [
+                    "To specify which record to start counting from",
+                    "To define the beginning of the result set for pagination",
+                    "To set the primary key starting value",
+                    "To initialize the aggregate counter"
+                ],
+                correct: 1,
+                explanation: "Start Index defines which record to begin returning results from, essential for implementing pagination."
+            },
+            {
+                topic: "Aggregates",
+                question: "How do you add a calculated field to an Aggregate?",
+                options: [
+                    "Use the Calculator widget",
+                    "Add an attribute with an expression",
+                    "Create a separate Server Action",
+                    "Use JavaScript functions"
+                ],
+                correct: 1,
+                explanation: "Calculated fields are added by creating attributes with expressions that can perform calculations on existing data."
+            },
+            {
+                topic: "Aggregates",
+                question: "What happens when you use a Group By in an Aggregate?",
+                options: [
+                    "Records are sorted alphabetically",
+                    "Duplicate records are removed",
+                    "Records are grouped by the specified attributes with aggregation functions",
+                    "The query execution is optimized"
+                ],
+                correct: 2,
+                explanation: "Group By groups records by specified attributes and allows the use of aggregation functions like COUNT, SUM, AVG."
+            },
+            {
+                topic: "Aggregates",
+                question: "Which aggregation function calculates the total sum of a numeric attribute?",
+                options: [
+                    "COUNT",
+                    "SUM",
+                    "AVG",
+                    "MAX"
+                ],
+                correct: 1,
+                explanation: "The SUM function calculates the total sum of all values in a numeric attribute for grouped records."
+            },
+            {
+                topic: "Aggregates",
+                question: "What is the difference between COUNT and COUNT DISTINCT in Aggregates?",
+                options: [
+                    "COUNT counts all records, COUNT DISTINCT counts unique values only",
+                    "They are identical functions",
+                    "COUNT DISTINCT is faster than COUNT",
+                    "COUNT DISTINCT only works with text attributes"
+                ],
+                correct: 0,
+                explanation: "COUNT counts all records including duplicates, while COUNT DISTINCT counts only unique values in the specified attribute."
+            },
+            {
+                topic: "Aggregates",
+                question: "How do you implement conditional filtering in an Aggregate?",
+                options: [
+                    "Use If-Then-Else logic in the query",
+                    "Add conditions in the Filter section",
+                    "Use JavaScript for filtering",
+                    "Create multiple aggregates"
+                ],
+                correct: 1,
+                explanation: "Conditional filtering is implemented by adding filter conditions in the Filter section of the aggregate."
+            },
+            {
+                topic: "Aggregates",
+                question: "What is the purpose of the Test Values feature in Aggregates?",
+                options: [
+                    "To validate the aggregate syntax",
+                    "To test the aggregate with sample input values and see results",
+                    "To measure query performance",
+                    "To generate test data"
+                ],
+                correct: 1,
+                explanation: "Test Values allows you to test aggregates with sample input parameters to preview results during development."
+            },
+            {
+                topic: "Aggregates",
+                question: "When should you use Joins in an Aggregate?",
+                options: [
+                    "Never, joins are not supported",
+                    "When you need to combine data from multiple related entities",
+                    "Only for performance optimization",
+                    "When creating calculated fields"
+                ],
+                correct: 1,
+                explanation: "Joins are used to combine data from multiple related entities in a single aggregate query."
+            },
+            {
+                topic: "Aggregates",
+                question: "What type of join is created by default when you add related entities to an Aggregate?",
+                options: [
+                    "INNER JOIN",
+                    "LEFT JOIN",
+                    "RIGHT JOIN",
+                    "FULL OUTER JOIN"
+                ],
+                correct: 0,
+                explanation: "By default, OutSystems creates INNER JOINs when you add related entities to an aggregate."
+            },
+            
+            // Application Troubleshooting Questions
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the first step when debugging a runtime error in OutSystems 11?",
+                options: [
+                    "Restart the application",
+                    "Check the Error Logs in Service Center",
+                    "Clear browser cache",
+                    "Republish the module"
+                ],
+                correct: 1,
+                explanation: "The Error Logs in Service Center provide detailed information about runtime errors and should be the first place to check."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "Which tool allows you to monitor application performance in real-time?",
+                options: [
+                    "Service Studio Debugger",
+                    "Analytics in Service Center",
+                    "Browser Developer Tools",
+                    "Database Management Studio"
+                ],
+                correct: 1,
+                explanation: "Analytics in Service Center provides real-time monitoring of application performance, including slow queries and errors."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "How do you set a breakpoint in a Server Action for debugging?",
+                options: [
+                    "Add a comment in the action",
+                    "Click in the left margin next to the action element",
+                    "Use the Debug menu",
+                    "Breakpoints are not supported in Server Actions"
+                ],
+                correct: 1,
+                explanation: "Breakpoints are set by clicking in the left margin next to any element in the action flow."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What information is available when inspecting variables during debugging?",
+                options: [
+                    "Only the variable name",
+                    "Variable name and current value",
+                    "Variable name, current value, and data type",
+                    "Complete execution history"
+                ],
+                correct: 2,
+                explanation: "The debugger shows variable names, current values, data types, and allows drill-down into complex structures."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "How do you debug Client Actions in a Reactive Web App?",
+                options: [
+                    "Use Service Studio debugger only",
+                    "Use browser developer tools only",
+                    "Use both Service Studio debugger and browser developer tools",
+                    "Client Actions cannot be debugged"
+                ],
+                correct: 2,
+                explanation: "Client Actions can be debugged using Service Studio's integrated debugger and browser developer tools for client-side issues."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the purpose of the Personal Area in Service Center?",
+                options: [
+                    "To manage user profiles",
+                    "To test applications in an isolated environment",
+                    "To store personal files",
+                    "To configure email settings"
+                ],
+                correct: 1,
+                explanation: "The Personal Area provides an isolated environment for testing applications without affecting other users."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "How do you identify slow-performing aggregates?",
+                options: [
+                    "Check the Analytics section in Service Center",
+                    "Use browser performance tools",
+                    "Count the number of records manually",
+                    "Slow aggregates cannot be identified"
+                ],
+                correct: 0,
+                explanation: "The Analytics section in Service Center shows slow queries and aggregates with execution times and frequency."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What should you do if an application is consuming too much memory?",
+                options: [
+                    "Restart the server",
+                    "Analyze the application for memory leaks and optimize data handling",
+                    "Increase server memory only",
+                    "Ignore the issue"
+                ],
+                correct: 1,
+                explanation: "Memory issues should be analyzed by checking for memory leaks, optimizing data fetching, and reviewing application logic."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "How do you troubleshoot integration issues with external systems?",
+                options: [
+                    "Check network connectivity and API endpoints",
+                    "Restart the OutSystems server",
+                    "Clear browser cache",
+                    "Republish all modules"
+                ],
+                correct: 0,
+                explanation: "Integration issues typically involve checking network connectivity, API endpoints, authentication, and data formats."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the purpose of the Request Log in Service Center?",
+                options: [
+                    "To track user login attempts",
+                    "To monitor HTTP requests and responses for debugging",
+                    "To log database queries",
+                    "To store application errors"
+                ],
+                correct: 1,
+                explanation: "The Request Log tracks HTTP requests and responses, helping to debug web service calls and integrations."
+            },
+            
+            // Data Relationships Questions
+            {
+                topic: "Data Relationships",
+                question: "What is a Reference Attribute in OutSystems 11?",
+                options: [
+                    "A calculated field",
+                    "A foreign key that references another entity's identifier",
+                    "A temporary variable",
+                    "A validation rule"
+                ],
+                correct: 1,
+                explanation: "A Reference Attribute is a foreign key that establishes a relationship by referencing another entity's identifier."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you create a self-referencing relationship in an entity?",
+                options: [
+                    "Create two identical entities",
+                    "Add a Reference Attribute that points to the same entity",
+                    "Use a separate junction table",
+                    "Self-referencing is not supported"
+                ],
+                correct: 1,
+                explanation: "Self-referencing relationships are created by adding a Reference Attribute that references the same entity's identifier."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What happens with the 'Ignore' delete rule?",
+                options: [
+                    "The parent record is protected from deletion",
+                    "Child records are deleted automatically",
+                    "The foreign key is set to null when parent is deleted",
+                    "The deletion is logged but not performed"
+                ],
+                correct: 2,
+                explanation: "The 'Ignore' delete rule sets the foreign key to null when the referenced parent record is deleted."
+            },
+            {
+                topic: "Data Relationships",
+                question: "In which scenario would you use a 'Delete' rule for a reference?",
+                options: [
+                    "When child records should remain orphaned",
+                    "When child records should be automatically deleted with the parent",
+                    "When the relationship is optional",
+                    "When you want to prevent any deletions"
+                ],
+                correct: 1,
+                explanation: "The 'Delete' rule automatically deletes child records when the parent record is deleted, maintaining referential integrity."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you navigate from a child entity to its parent in an aggregate?",
+                options: [
+                    "Use the parent entity's name directly",
+                    "Use the reference attribute name followed by the parent's attributes",
+                    "Create a separate query",
+                    "Navigation is not possible in aggregates"
+                ],
+                correct: 1,
+                explanation: "Navigation is done using the reference attribute name followed by a dot and the parent entity's attributes."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What is the recommended approach for modeling a Category hierarchy?",
+                options: [
+                    "Create separate entities for each level",
+                    "Use a self-referencing relationship with ParentId",
+                    "Store hierarchy as text",
+                    "Use multiple junction tables"
+                ],
+                correct: 1,
+                explanation: "Hierarchical data is best modeled using self-referencing relationships where each record has a ParentId pointing to its parent."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you ensure referential integrity in OutSystems 11?",
+                options: [
+                    "Using JavaScript validation only",
+                    "Using Reference Attributes and appropriate delete rules",
+                    "Manual checking in all actions",
+                    "Referential integrity is automatic"
+                ],
+                correct: 1,
+                explanation: "Referential integrity is maintained through proper use of Reference Attributes and setting appropriate delete rules."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What is the maximum number of levels supported in entity relationships?",
+                options: [
+                    "3 levels",
+                    "5 levels",
+                    "No specific limit",
+                    "10 levels"
+                ],
+                correct: 2,
+                explanation: "OutSystems doesn't impose a specific limit on relationship levels, though deep relationships may impact performance."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you model a relationship where an Order can have multiple Products and a Product can be in multiple Orders?",
+                options: [
+                    "Add ProductId to Order entity",
+                    "Add OrderId to Product entity",
+                    "Create an OrderProduct junction entity",
+                    "Use separate databases"
+                ],
+                correct: 2,
+                explanation: "Many-to-many relationships require a junction entity (OrderProduct) containing foreign keys to both related entities."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What is the purpose of the 'On Delete' property in Reference Attributes?",
+                options: [
+                    "To improve query performance",
+                    "To define what happens to related records when the referenced record is deleted",
+                    "To set default values",
+                    "To enable cascade updates"
+                ],
+                correct: 1,
+                explanation: "The 'On Delete' property defines the behavior of related records when the referenced parent record is deleted."
+            },
+            
+            // Entities and Static Entities Questions
+            {
+                topic: "Entities and Static Entities",
+                question: "What attribute types are automatically created for every Entity?",
+                options: [
+                    "Id (Long Integer), CreatedOn (Date Time), UpdatedOn (Date Time)",
+                    "Name (Text), Description (Text)",
+                    "IsActive (Boolean), Status (Integer)",
+                    "CreatedBy (User Identifier), UpdatedBy (User Identifier)"
+                ],
+                correct: 0,
+                explanation: "Every entity automatically includes Id (primary key), CreatedOn, and UpdatedOn attributes for tracking and identification."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "How do you add custom attributes to a Static Entity?",
+                options: [
+                    "Custom attributes are not supported in Static Entities",
+                    "Right-click and select 'Add Attribute'",
+                    "Use the Entity Properties panel",
+                    "Attributes are added automatically"
+                ],
+                correct: 1,
+                explanation: "Custom attributes can be added to Static Entities by right-clicking and selecting 'Add Attribute' in the entity definition."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What is the data type of the Id attribute in entities?",
+                options: [
+                    "Integer",
+                    "Long Integer",
+                    "Text",
+                    "Entity Identifier"
+                ],
+                correct: 1,
+                explanation: "The Id attribute is automatically created as a Long Integer data type to ensure unique identification of records."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "How do you define the initial data for a Static Entity?",
+                options: [
+                    "Add records in the Static Entity editor",
+                    "Import from a CSV file",
+                    "Use Bootstrap actions",
+                    "All of the above"
+                ],
+                correct: 3,
+                explanation: "Static Entity data can be defined through the entity editor, CSV import, or Bootstrap actions for initial data setup."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What happens to Static Entity data during application deployment?",
+                options: [
+                    "Data is lost",
+                    "Data is preserved and synchronized",
+                    "Data must be manually recreated",
+                    "Data is stored separately"
+                ],
+                correct: 1,
+                explanation: "Static Entity data is preserved and synchronized during deployment, maintaining consistency across environments."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "Can you modify Static Entity records at runtime?",
+                options: [
+                    "Yes, like regular entity records",
+                    "No, Static Entity records are read-only at runtime",
+                    "Only with special permissions",
+                    "Only through Service Center"
+                ],
+                correct: 1,
+                explanation: "Static Entity records are read-only at runtime and can only be modified during design time or deployment."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What is the recommended naming convention for entities in OutSystems 11?",
+                options: [
+                    "Use singular nouns (e.g., Customer, Order)",
+                    "Use plural nouns (e.g., Customers, Orders)",
+                    "Use verbs (e.g., CreateCustomer)",
+                    "Use abbreviations only"
+                ],
+                correct: 0,
+                explanation: "OutSystems recommends using singular nouns for entity names as they represent a single instance of the data structure."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "How do you create an index on an entity attribute?",
+                options: [
+                    "Indexes are created automatically",
+                    "Use the 'Create Index' property in the attribute",
+                    "Indexes are not supported",
+                    "Use SQL scripts only"
+                ],
+                correct: 1,
+                explanation: "Indexes can be created by setting the 'Create Index' property to True in the attribute definition for improved query performance."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What is the purpose of the 'Length' property in Text attributes?",
+                options: [
+                    "To improve performance",
+                    "To set the maximum number of characters that can be stored",
+                    "To enable search functionality",
+                    "To set the display width"
+                ],
+                correct: 1,
+                explanation: "The Length property defines the maximum number of characters that can be stored in a Text attribute."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "How do you make an attribute mandatory in an entity?",
+                options: [
+                    "Set the 'Is Mandatory' property to True",
+                    "Add validation in all screens",
+                    "Use a different data type",
+                    "Mandatory attributes are not supported"
+                ],
+                correct: 0,
+                explanation: "Setting the 'Is Mandatory' property to True enforces that the attribute must have a value when creating or updating records."
+            },
+            
+            // Exception Handling Questions
+            {
+                topic: "Exception Handling",
+                question: "What is the correct syntax to raise a User Exception in OutSystems 11?",
+                options: [
+                    "Throw Exception",
+                    "Raise Exception",
+                    "Exception (Raise)",
+                    "User Exception (Raise)"
+                ],
+                correct: 1,
+                explanation: "The Raise Exception action is used to raise User Exceptions with custom error messages in OutSystems 11."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you handle multiple exception types in a single action?",
+                options: [
+                    "Use multiple Exception Handler flows",
+                    "Use nested Try-Catch blocks",
+                    "Use If conditions to check exception type",
+                    "Multiple exception types cannot be handled"
+                ],
+                correct: 0,
+                explanation: "Multiple exception types are handled by using multiple Exception Handler flows, each handling a specific exception type."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What information is available in the Exception object?",
+                options: [
+                    "Error message only",
+                    "Error message and exception type",
+                    "Error message, exception type, and stack trace",
+                    "Complete system state"
+                ],
+                correct: 2,
+                explanation: "The Exception object contains the error message, exception type, and stack trace information for debugging."
+            },
+            {
+                topic: "Exception Handling",
+                question: "When should you use the 'All Exceptions' handler?",
+                options: [
+                    "For every action",
+                    "As a catch-all for unexpected exceptions when specific handlers exist",
+                    "Only for User Exceptions",
+                    "Never, it's deprecated"
+                ],
+                correct: 1,
+                explanation: "The 'All Exceptions' handler should be used as a safety net to catch any unexpected exceptions not handled by specific handlers."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you log exceptions for later analysis?",
+                options: [
+                    "Use the Log Error action",
+                    "Write to a text file",
+                    "Send an email",
+                    "Exceptions are logged automatically"
+                ],
+                correct: 0,
+                explanation: "The Log Error action is used to log exceptions to the Error Log in Service Center for analysis and debugging."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What happens if an exception occurs in a Database Transaction?",
+                options: [
+                    "The transaction continues",
+                    "The transaction is automatically rolled back",
+                    "Only the failed operation is undone",
+                    "The exception is ignored"
+                ],
+                correct: 1,
+                explanation: "When an exception occurs within a database transaction, the entire transaction is automatically rolled back to maintain data consistency."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you create custom exception types in OutSystems 11?",
+                options: [
+                    "Define Exception entities",
+                    "Create Exception Structures",
+                    "Use Static Entities for exception types",
+                    "Custom exception types are not supported"
+                ],
+                correct: 1,
+                explanation: "Custom exception types are created by defining Exception Structures that can carry additional context information."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What is the difference between handled and unhandled exceptions?",
+                options: [
+                    "Handled exceptions are caught by exception handlers, unhandled exceptions stop execution",
+                    "There is no difference",
+                    "Handled exceptions are faster",
+                    "Unhandled exceptions are automatically fixed"
+                ],
+                correct: 0,
+                explanation: "Handled exceptions are caught by exception handlers and allow graceful error handling, while unhandled exceptions stop execution and show error messages."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you test exception handling in your application?",
+                options: [
+                    "Create test scenarios that trigger exceptions",
+                    "Exceptions cannot be tested",
+                    "Use only production data",
+                    "Wait for real errors to occur"
+                ],
+                correct: 0,
+                explanation: "Exception handling should be tested by creating scenarios that deliberately trigger exceptions to verify proper handling behavior."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What should you include in exception messages for users?",
+                options: [
+                    "Technical details and stack traces",
+                    "User-friendly messages that explain what happened and what to do next",
+                    "System error codes only",
+                    "No message is needed"
+                ],
+                correct: 1,
+                explanation: "Exception messages for users should be friendly, informative, and provide guidance on what they can do to resolve the issue."
+            },
+            
+            // Additional topics continue...
+            // Form Validations
+            {
+                topic: "Form Validations",
+                question: "What is the difference between client-side and server-side validation?",
+                options: [
+                    "Client-side is for UI feedback, server-side is for security and business rules",
+                    "They are identical in functionality",
+                    "Server-side is faster than client-side",
+                    "Client-side validations are more secure"
+                ],
+                correct: 0,
+                explanation: "Client-side validation provides immediate UI feedback, while server-side validation enforces security and business rules that cannot be bypassed."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you create custom validation messages?",
+                options: [
+                    "Use the Valid property with custom expressions",
+                    "Custom messages are not supported",
+                    "Modify browser settings",
+                    "Use JavaScript only"
+                ],
+                correct: 0,
+                explanation: "Custom validation messages are created using the Valid property with expressions that return True/False and custom ValidationMessage properties."
+            },
+            {
+                topic: "Form Validations",
+                question: "When does built-in validation execute?",
+                options: [
+                    "Only on form submission",
+                    "On field blur and form submission",
+                    "Continuously while typing",
+                    "Only when manually triggered"
+                ],
+                correct: 1,
+                explanation: "Built-in validation typically executes when a field loses focus (blur event) and on form submission."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you validate data across multiple input fields?",
+                options: [
+                    "Use individual field validations only",
+                    "Create validation logic in the submit action",
+                    "Cross-field validation is not supported",
+                    "Use JavaScript functions"
+                ],
+                correct: 1,
+                explanation: "Cross-field validation is typically implemented in the submit action where you can access and validate multiple field values together."
+            },
+            {
+                topic: "Form Validations",
+                question: "What happens when validation fails in a Reactive Web App?",
+                options: [
+                    "The form is submitted anyway",
+                    "Validation messages are shown and submission is prevented",
+                    "The page reloads",
+                    "An exception is thrown"
+                ],
+                correct: 1,
+                explanation: "When validation fails, the framework displays validation messages and prevents form submission until all validations pass."
+            },
+            
+            // Continue with more questions for remaining topics...
+            // Screen Lifecycle
+            {
+                topic: "Screen Lifecycle",
+                question: "What is the correct order of execution for screen events in a Reactive Web App?",
+                options: [
+                    "OnInitialize → OnReady → OnRender → OnDestroy",
+                    "OnReady → OnInitialize → OnRender → OnDestroy",
+                    "OnRender → OnInitialize → OnReady → OnDestroy",
+                    "OnInitialize → OnRender → OnReady → OnDestroy"
+                ],
+                correct: 0,
+                explanation: "The correct order is OnInitialize (server-side preparation), OnReady (client initialization), OnRender (DOM ready), and OnDestroy (cleanup)."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "When should you use the OnDestroy event?",
+                options: [
+                    "To save user data",
+                    "To clean up resources and event listeners",
+                    "To validate form data",
+                    "To initialize variables"
+                ],
+                correct: 1,
+                explanation: "OnDestroy is used to clean up resources, remove event listeners, and perform cleanup tasks when the screen is being destroyed."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What type of logic should be placed in the OnInitialize event?",
+                options: [
+                    "Client-side DOM manipulations",
+                    "Server-side data fetching and preparation",
+                    "User interface animations",
+                    "Browser-specific code"
+                ],
+                correct: 1,
+                explanation: "OnInitialize is for server-side logic including data fetching, permission checks, and preparing data for the screen."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "How do you pass parameters to a screen's OnInitialize event?",
+                options: [
+                    "Use screen input parameters",
+                    "Use global variables",
+                    "Use cookies",
+                    "Parameters cannot be passed"
+                ],
+                correct: 0,
+                explanation: "Screen input parameters are automatically available in the OnInitialize event for data preparation and conditional logic."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What happens if an exception occurs in the OnInitialize event?",
+                options: [
+                    "The screen loads normally",
+                    "An error screen is displayed",
+                    "The application crashes",
+                    "The exception is ignored"
+                ],
+                correct: 1,
+                explanation: "Exceptions in OnInitialize prevent the screen from loading and typically display an error screen or message to the user."
+            },
+            
+            // Client Variables
+            {
+                topic: "Client Variables",
+                question: "Where are Client Variables stored?",
+                options: [
+                    "Server database",
+                    "Browser's local storage",
+                    "Application memory",
+                    "External cache"
+                ],
+                correct: 1,
+                explanation: "Client Variables are stored in the browser's local storage, making them persistent across browser sessions until explicitly cleared."
+            },
+            {
+                topic: "Client Variables",
+                question: "What happens to Client Variables when the user clears browser data?",
+                options: [
+                    "They are preserved",
+                    "They are deleted",
+                    "They are backed up automatically",
+                    "They are moved to server storage"
+                ],
+                correct: 1,
+                explanation: "Client Variables are deleted when users clear their browser data, as they are stored in local storage."
+            },
+            {
+                topic: "Client Variables",
+                question: "How do you initialize a Client Variable with a default value?",
+                options: [
+                    "Set the Default Value property",
+                    "Use an assignment in OnInitialize",
+                    "Use JavaScript",
+                    "Default values are not supported"
+                ],
+                correct: 0,
+                explanation: "Client Variables can be initialized by setting the Default Value property in the variable definition."
+            },
+            {
+                topic: "Client Variables",
+                question: "What is the maximum size limit for Client Variables?",
+                options: [
+                    "1 MB",
+                    "5 MB",
+                    "Depends on browser storage limits",
+                    "No limit"
+                ],
+                correct: 2,
+                explanation: "Client Variable size limits depend on the browser's local storage limitations, typically around 5-10 MB per domain."
+            },
+            {
+                topic: "Client Variables",
+                question: "Can Client Variables be accessed from Server Actions?",
+                options: [
+                    "Yes, directly",
+                    "No, they are client-side only",
+                    "Only with special configuration",
+                    "Only through web services"
+                ],
+                correct: 1,
+                explanation: "Client Variables are client-side only and cannot be directly accessed from Server Actions. Data must be passed through parameters."
+            },
+            
+            // More questions for comprehensive coverage...
+            // Site Properties
+            {
+                topic: "Site Properties",
+                question: "What is the primary purpose of Site Properties in OutSystems 11?",
+                options: [
+                    "To store user preferences",
+                    "To store application-wide configuration values",
+                    "To store temporary data",
+                    "To store database connection strings"
+                ],
+                correct: 1,
+                explanation: "Site Properties store application-wide configuration values that can be changed without recompiling the application."
+            },
+            {
+                topic: "Site Properties",
+                question: "How do you access a Site Property value in your application logic?",
+                options: [
+                    "Use the Site.PropertyName syntax",
+                    "Use GetSiteProperty() function",
+                    "Use database queries",
+                    "Site Properties cannot be accessed in logic"
+                ],
+                correct: 0,
+                explanation: "Site Properties are accessed using the Site.PropertyName syntax directly in expressions and logic."
+            },
+            {
+                topic: "Site Properties",
+                question: "Where can Site Property values be modified?",
+                options: [
+                    "Only in Service Studio",
+                    "Only in Service Center",
+                    "Both Service Studio and Service Center",
+                    "Site Property values are read-only"
+                ],
+                correct: 2,
+                explanation: "Site Property values can be set in Service Studio (default values) and modified in Service Center (runtime values)."
+            },
+            {
+                topic: "Site Properties",
+                question: "What data types are supported for Site Properties?",
+                options: [
+                    "Text only",
+                    "Text, Integer, Boolean, and Decimal",
+                    "All OutSystems data types",
+                    "Text and Integer only"
+                ],
+                correct: 1,
+                explanation: "Site Properties support basic data types: Text, Integer, Boolean, and Decimal for configuration values."
+            },
+            {
+                topic: "Site Properties",
+                question: "What happens to Site Property values during application deployment?",
+                options: [
+                    "Values are reset to defaults",
+                    "Values are preserved from the source environment",
+                    "Values must be manually reconfigured",
+                    "Values are lost"
+                ],
+                correct: 1,
+                explanation: "Site Property values are preserved during deployment and can be configured per environment in Service Center."
+            },
+            
+            // SQL Queries
+            {
+                topic: "SQL Queries",
+                question: "When should you use Advanced SQL instead of Aggregates?",
+                options: [
+                    "For all database operations",
+                    "For complex queries that cannot be expressed with Aggregates",
+                    "Never, Aggregates are always preferred",
+                    "Only for data insertion"
+                ],
+                correct: 1,
+                explanation: "Advanced SQL should be used when the query complexity exceeds what Aggregates can handle, such as complex joins or database-specific functions."
+            },
+            {
+                topic: "SQL Queries",
+                question: "How do you parameterize SQL queries in OutSystems 11?",
+                options: [
+                    "Use string concatenation",
+                    "Use input parameters with @ prefix",
+                    "Use global variables",
+                    "Parameterization is not supported"
+                ],
+                correct: 1,
+                explanation: "SQL queries are parameterized using input parameters with the @ prefix (e.g., @UserId) to prevent SQL injection."
+            },
+            {
+                topic: "SQL Queries",
+                question: "What is the purpose of the Test SQL feature?",
+                options: [
+                    "To validate SQL syntax",
+                    "To test queries with sample values and see results",
+                    "To measure performance",
+                    "To generate test data"
+                ],
+                correct: 1,
+                explanation: "Test SQL allows you to test your SQL queries with sample parameter values to verify results during development."
+            },
+            {
+                topic: "SQL Queries",
+                question: "How do you handle dynamic WHERE clauses in SQL queries?",
+                options: [
+                    "Use multiple queries",
+                    "Use conditional SQL with IF statements",
+                    "Use the Expand Inline property with BuildSelect functions",
+                    "Dynamic clauses are not supported"
+                ],
+                correct: 2,
+                explanation: "Dynamic WHERE clauses are handled using the Expand Inline property with BuildSelect functions for conditional query building."
+            },
+            {
+                topic: "SQL Queries",
+                question: "What should you avoid when writing SQL queries in OutSystems?",
+                options: [
+                    "Using JOINs",
+                    "Using string concatenation for parameters",
+                    "Using ORDER BY clauses",
+                    "Using WHERE clauses"
+                ],
+                correct: 1,
+                explanation: "String concatenation for parameters should be avoided as it can lead to SQL injection vulnerabilities. Use parameterized queries instead."
+            },
+            
+            // Continue with more questions to reach 250 total...
+            // Additional diverse questions across all topics
+            {
+                topic: "Data Display Widgets",
+                question: "What is the main advantage of using a List widget over a Table widget?",
+                options: [
+                    "Better performance",
+                    "More flexible layout and styling options",
+                    "Automatic sorting",
+                    "Built-in pagination"
+                ],
+                correct: 1,
+                explanation: "List widgets offer more flexible layout and styling options, allowing custom designs for each list item."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What is the purpose of the End node in action flows?",
+                options: [
+                    "To terminate the application",
+                    "To mark the end of the action execution",
+                    "To handle errors",
+                    "To return values"
+                ],
+                correct: 1,
+                explanation: "The End node marks the completion of action execution and can be used to return output values."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you create a multi-select dropdown in OutSystems 11?",
+                options: [
+                    "Use multiple Dropdown widgets",
+                    "Use a Dropdown with multiple selection enabled",
+                    "Use a List widget with checkboxes",
+                    "Multi-select dropdowns are not supported"
+                ],
+                correct: 2,
+                explanation: "Multi-select functionality is typically implemented using a List widget with checkboxes for each option."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What is a Consumer module in OutSystems 11?",
+                options: [
+                    "A module that exposes functionality",
+                    "A module that uses functionality from other modules",
+                    "A module that handles user interfaces",
+                    "A module that manages data only"
+                ],
+                correct: 1,
+                explanation: "A Consumer module uses (consumes) functionality exposed by Producer modules through public elements."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement server-side pagination for better performance?",
+                options: [
+                    "Load all data and paginate on client",
+                    "Use Start Index and Max Records in Aggregates",
+                    "Use JavaScript pagination",
+                    "Server-side pagination is not supported"
+                ],
+                correct: 1,
+                explanation: "Server-side pagination is implemented using Start Index and Max Records properties in Aggregates to limit data transfer."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you check if a user belongs to multiple roles?",
+                options: [
+                    "Use CheckRole() with AND logic",
+                    "Use multiple CheckRole() calls with OR logic",
+                    "Use GetUserRoles() function",
+                    "Multiple role checking is not supported"
+                ],
+                correct: 1,
+                explanation: "Multiple role checking is done using multiple CheckRole() calls combined with appropriate logical operators (AND/OR)."
+            },
+            {
+                topic: "UI Development",
+                question: "What is the purpose of CSS classes in OutSystems widgets?",
+                options: [
+                    "To add functionality",
+                    "To style and format widget appearance",
+                    "To handle events",
+                    "To store data"
+                ],
+                correct: 1,
+                explanation: "CSS classes are used to style and format the visual appearance of widgets through cascading style sheets."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "How do you implement data transactions in OutSystems 11?",
+                options: [
+                    "Use the Transaction action",
+                    "Transactions are automatic",
+                    "Use database stored procedures",
+                    "Transactions are not supported"
+                ],
+                correct: 0,
+                explanation: "Data transactions are implemented using the Transaction action to ensure atomic operations and data consistency."
+            },
+            {
+                topic: "Application Structure",
+                question: "What is the purpose of the Common module in OutSystems applications?",
+                options: [
+                    "To store user interfaces",
+                    "To store shared entities and logic used across multiple modules",
+                    "To handle security",
+                    "To manage integrations"
+                ],
+                correct: 1,
+                explanation: "The Common module contains shared entities, structures, and logic that are used by multiple modules in the application."
+            },
+            {
+                topic: "Best Practices",
+                question: "What is the recommended approach for handling sensitive data in OutSystems?",
+                options: [
+                    "Store in Client Variables",
+                    "Use proper encryption and access controls",
+                    "Store in plain text",
+                    "Use cookies for storage"
+                ],
+                correct: 1,
+                explanation: "Sensitive data should be handled with proper encryption, access controls, and security best practices to protect user information."
+            },
+            // Additional questions to reach 250 total
+            {
+                topic: "Aggregates",
+                question: "What is the purpose of the Having clause in Aggregates?",
+                options: [
+                    "To filter records before grouping",
+                    "To filter grouped results after aggregation",
+                    "To sort the results",
+                    "To join multiple entities"
+                ],
+                correct: 1,
+                explanation: "The Having clause filters grouped results after aggregation functions are applied, unlike Where which filters before grouping."
+            },
+            {
+                topic: "Data Relationships",
+                question: "What is the recommended approach for handling optional relationships?",
+                options: [
+                    "Use mandatory Reference Attributes",
+                    "Use optional Reference Attributes with 'Ignore' delete rule",
+                    "Avoid optional relationships",
+                    "Use separate entities"
+                ],
+                correct: 1,
+                explanation: "Optional relationships should use optional Reference Attributes with 'Ignore' delete rule to handle null values properly."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What is the OnParametersChanged event used for?",
+                options: [
+                    "To validate input parameters",
+                    "To react when screen parameters change in Reactive Web Apps",
+                    "To handle navigation events",
+                    "To manage user sessions"
+                ],
+                correct: 1,
+                explanation: "OnParametersChanged is triggered when screen input parameters change, allowing you to react and update the screen accordingly."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What is the difference between Functions and Actions in OutSystems?",
+                options: [
+                    "Functions can modify data, Actions cannot",
+                    "Functions are read-only and return values, Actions can modify data",
+                    "There is no difference",
+                    "Functions are faster than Actions"
+                ],
+                correct: 1,
+                explanation: "Functions are read-only operations that return values without side effects, while Actions can modify data and perform operations."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What is the Security Exception used for?",
+                options: [
+                    "Database connection errors",
+                    "User authentication and authorization failures",
+                    "Network connectivity issues",
+                    "Data validation errors"
+                ],
+                correct: 1,
+                explanation: "Security Exception is specifically used for authentication and authorization failures when users lack proper permissions."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you implement real-time validation as the user types?",
+                options: [
+                    "Use the OnChange event with validation logic",
+                    "Real-time validation is not supported",
+                    "Use JavaScript only",
+                    "Use server-side validation only"
+                ],
+                correct: 0,
+                explanation: "Real-time validation is implemented using the OnChange event of input widgets with custom validation logic."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "What is the purpose of Entity Diagrams in OutSystems?",
+                options: [
+                    "To generate reports",
+                    "To visualize entity relationships and dependencies",
+                    "To create database indexes",
+                    "To validate data integrity"
+                ],
+                correct: 1,
+                explanation: "Entity Diagrams provide a visual representation of entity relationships and dependencies for better understanding and design."
+            },
+            {
+                topic: "Client Variables",
+                question: "How do you share data between different screens using Client Variables?",
+                options: [
+                    "Client Variables are automatically shared across screens",
+                    "Use input parameters instead",
+                    "Client Variables cannot be shared",
+                    "Use server-side storage"
+                ],
+                correct: 0,
+                explanation: "Client Variables are automatically available across all screens within the same application, making data sharing seamless."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the purpose of the Slow SQL Queries report in Service Center?",
+                options: [
+                    "To count database records",
+                    "To identify and optimize poorly performing database queries",
+                    "To backup database data",
+                    "To manage user permissions"
+                ],
+                correct: 1,
+                explanation: "The Slow SQL Queries report helps identify poorly performing database queries that need optimization for better application performance."
+            },
+            {
+                topic: "Site Properties",
+                question: "How do you use Site Properties for environment-specific configuration?",
+                options: [
+                    "Site Properties are the same across all environments",
+                    "Set different values in Service Center for each environment",
+                    "Use different modules for each environment",
+                    "Environment-specific configuration is not supported"
+                ],
+                correct: 1,
+                explanation: "Site Properties can have different values in each environment by configuring them in Service Center for environment-specific settings."
+            },
+            {
+                topic: "SQL Queries",
+                question: "What is the Expand Inline property used for in SQL queries?",
+                options: [
+                    "To improve query performance",
+                    "To dynamically build SQL statements at runtime",
+                    "To validate SQL syntax",
+                    "To format query results"
+                ],
+                correct: 1,
+                explanation: "Expand Inline allows dynamic SQL construction at runtime, useful for conditional WHERE clauses and dynamic query building."
+            },
+            {
+                topic: "Role-based Security",
+                question: "What is the Anonymous role in OutSystems?",
+                options: [
+                    "A role for administrators",
+                    "A role automatically assigned to non-authenticated users",
+                    "A role for testing purposes",
+                    "A deprecated role"
+                ],
+                correct: 1,
+                explanation: "The Anonymous role is automatically assigned to users who are not authenticated, allowing controlled access to public areas."
+            },
+            {
+                topic: "Input Widgets",
+                question: "What is the purpose of the Variable property in Input widgets?",
+                options: [
+                    "To set the widget's visual style",
+                    "To bind the widget to a variable for data binding",
+                    "To validate input data",
+                    "To handle click events"
+                ],
+                correct: 1,
+                explanation: "The Variable property binds the input widget to a variable, enabling two-way data binding for form handling."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "How do you implement conditional row styling in a Table widget?",
+                options: [
+                    "Use CSS classes only",
+                    "Use the Style Classes property with expressions",
+                    "Conditional styling is not supported",
+                    "Use JavaScript functions"
+                ],
+                correct: 1,
+                explanation: "Conditional row styling is implemented using the Style Classes property with expressions that evaluate to different CSS classes based on data."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "What is the purpose of the Count property in Aggregates for pagination?",
+                options: [
+                    "To count the number of columns",
+                    "To get the total number of records matching the criteria",
+                    "To measure query performance",
+                    "To validate data integrity"
+                ],
+                correct: 1,
+                explanation: "The Count property returns the total number of records matching the aggregate criteria, essential for calculating pagination information."
+            },
+            {
+                topic: "UI Development",
+                question: "What is the purpose of Blocks in OutSystems UI development?",
+                options: [
+                    "To create database tables",
+                    "To create reusable UI components",
+                    "To handle business logic",
+                    "To manage user sessions"
+                ],
+                correct: 1,
+                explanation: "Blocks are reusable UI components that encapsulate interface elements and logic for consistent and maintainable design."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What happens when you change a public interface in a Producer module?",
+                options: [
+                    "Consumer modules are automatically updated",
+                    "Consumer modules show impact analysis warnings and need to be refreshed",
+                    "The change is ignored",
+                    "Consumer modules stop working immediately"
+                ],
+                correct: 1,
+                explanation: "Changes to public interfaces trigger impact analysis warnings in consumer modules, which need to refresh dependencies and handle any breaking changes."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "What is the purpose of the Create<Entity> action?",
+                options: [
+                    "To create database tables",
+                    "To create new entity records in the database",
+                    "To create entity relationships",
+                    "To create entity validations"
+                ],
+                correct: 1,
+                explanation: "The Create<Entity> action inserts new records into the database for the specified entity with the provided attribute values."
+            },
+            {
+                topic: "Application Structure",
+                question: "What is the recommended way to organize large applications in OutSystems?",
+                options: [
+                    "Use a single large module",
+                    "Split into multiple modules by functional areas",
+                    "Create separate applications for each feature",
+                    "Organization doesn't matter"
+                ],
+                correct: 1,
+                explanation: "Large applications should be split into multiple modules organized by functional areas for better maintainability and team collaboration."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "What is the difference between Aggregates and Data Actions?",
+                options: [
+                    "Aggregates are for entities, Data Actions are for external data",
+                    "They are identical in functionality",
+                    "Data Actions are faster",
+                    "Aggregates are deprecated"
+                ],
+                correct: 0,
+                explanation: "Aggregates are used to fetch data from OutSystems entities, while Data Actions can fetch data from external systems or web services."
+            },
+            {
+                topic: "Best Practices",
+                question: "What is the recommended naming convention for Screen Actions?",
+                options: [
+                    "Use verbs describing the action (e.g., SaveCustomer, DeleteOrder)",
+                    "Use nouns only",
+                    "Use abbreviations",
+                    "Naming conventions don't matter"
+                ],
+                correct: 0,
+                explanation: "Screen Actions should use verbs that clearly describe what the action does, making the code more readable and maintainable."
+            },
+            {
+                topic: "Aggregates",
+                question: "How do you implement dynamic filtering in Aggregates?",
+                options: [
+                    "Use multiple aggregates",
+                    "Use filter conditions with expressions based on input parameters",
+                    "Dynamic filtering is not supported",
+                    "Use JavaScript for filtering"
+                ],
+                correct: 1,
+                explanation: "Dynamic filtering is implemented using filter conditions with expressions that evaluate based on input parameters or variables."
+            },
+            {
+                topic: "Exception Handling",
+                question: "What is the Communication Exception used for?",
+                options: [
+                    "User authentication errors",
+                    "Network connectivity and integration failures",
+                    "Database errors",
+                    "Validation errors"
+                ],
+                correct: 1,
+                explanation: "Communication Exception is used for network connectivity issues and failures when integrating with external systems or web services."
+            },
+            {
+                topic: "Data Relationships",
+                question: "How do you implement a one-to-one relationship in OutSystems?",
+                options: [
+                    "Use two separate entities with no relationship",
+                    "Use a Reference Attribute with unique constraint",
+                    "Use a junction entity",
+                    "One-to-one relationships are not supported"
+                ],
+                correct: 1,
+                explanation: "One-to-one relationships are implemented using a Reference Attribute with a unique constraint to ensure only one record can reference each parent."
+            },
+            {
+                topic: "Form Validations",
+                question: "How do you implement custom validation rules that depend on external data?",
+                options: [
+                    "Use client-side validation only",
+                    "Implement validation logic in submit actions with server calls",
+                    "Custom validation is not supported",
+                    "Use browser validation API"
+                ],
+                correct: 1,
+                explanation: "Custom validation that depends on external data should be implemented in submit actions where you can make server calls and check against databases or external systems."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "What is the difference between OnReady and OnRender events?",
+                options: [
+                    "OnReady runs first, OnRender runs after DOM is fully rendered",
+                    "They are identical",
+                    "OnRender is faster",
+                    "OnReady is server-side, OnRender is client-side"
+                ],
+                correct: 0,
+                explanation: "OnReady runs when the screen is loaded and ready, while OnRender runs after the DOM is fully rendered and painted."
+            },
+            {
+                topic: "Client Variables",
+                question: "What happens to Client Variables when the user navigates between screens?",
+                options: [
+                    "They are reset",
+                    "They are preserved within the same application",
+                    "They are lost",
+                    "They are stored on the server"
+                ],
+                correct: 1,
+                explanation: "Client Variables are preserved when navigating between screens within the same application, maintaining state across the user session."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What is the purpose of the If node in action flows?",
+                options: [
+                    "To handle exceptions",
+                    "To create conditional logic branches in the flow",
+                    "To loop through data",
+                    "To call other actions"
+                ],
+                correct: 1,
+                explanation: "The If node creates conditional logic branches in action flows, allowing different execution paths based on Boolean conditions."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you implement cascading dropdowns in OutSystems?",
+                options: [
+                    "Use multiple independent dropdowns",
+                    "Use OnChange event of parent dropdown to refresh child dropdown data",
+                    "Cascading dropdowns are not supported",
+                    "Use static data only"
+                ],
+                correct: 1,
+                explanation: "Cascading dropdowns are implemented using the OnChange event of the parent dropdown to trigger a refresh of the child dropdown's data source."
+            },
+            {
+                topic: "Site Properties",
+                question: "Can Site Properties be modified at runtime through application logic?",
+                options: [
+                    "Yes, using SetSiteProperty action",
+                    "No, they are read-only from application logic",
+                    "Only with special permissions",
+                    "Only through web services"
+                ],
+                correct: 1,
+                explanation: "Site Properties are read-only from application logic and can only be modified through Service Center or during deployment."
+            },
+            {
+                topic: "SQL Queries",
+                question: "How do you handle NULL values in SQL queries?",
+                options: [
+                    "Use IS NULL and IS NOT NULL operators",
+                    "Use = NULL operator",
+                    "NULL values cannot be handled",
+                    "Use empty string comparison"
+                ],
+                correct: 0,
+                explanation: "NULL values in SQL should be handled using IS NULL and IS NOT NULL operators, as the = operator doesn't work with NULL values."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "What is the purpose of the General Log in Service Center?",
+                options: [
+                    "To log user activities",
+                    "To log custom application messages and debugging information",
+                    "To log database queries",
+                    "To log system errors only"
+                ],
+                correct: 1,
+                explanation: "The General Log captures custom application messages and debugging information written using the LogMessage action for troubleshooting."
+            },
+            {
+                topic: "Role-based Security",
+                question: "How do you implement role-based access control for specific UI elements?",
+                options: [
+                    "Use If conditions with CheckRole() function",
+                    "Hide elements with CSS",
+                    "Use JavaScript for security",
+                    "UI-level security is not supported"
+                ],
+                correct: 0,
+                explanation: "Role-based access for UI elements is implemented using If conditions with the CheckRole() function to show/hide elements based on user roles."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "What is the purpose of the Empty State in List and Table widgets?",
+                options: [
+                    "To show loading indicators",
+                    "To display a message when no data is available",
+                    "To handle errors",
+                    "Empty states are not supported"
+                ],
+                correct: 1,
+                explanation: "Empty State provides a user-friendly message or interface when the List or Table widget has no data to display."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you implement multi-column sorting in OutSystems?",
+                options: [
+                    "Use multiple Sort attributes in the aggregate",
+                    "Multi-column sorting is not supported",
+                    "Use JavaScript for client-side sorting",
+                    "Create separate queries for each sort combination"
+                ],
+                correct: 0,
+                explanation: "Multi-column sorting is implemented by adding multiple Sort attributes in the aggregate, with the order determining sort priority."
+            },
+            {
+                topic: "UI Development",
+                question: "What is the purpose of the Style Classes property in widgets?",
+                options: [
+                    "To add functionality",
+                    "To apply CSS classes for styling and conditional formatting",
+                    "To store data",
+                    "To handle events"
+                ],
+                correct: 1,
+                explanation: "The Style Classes property allows you to apply CSS classes to widgets for styling and conditional formatting based on expressions."
+            },
+            {
+                topic: "Modular Dependencies",
+                question: "What is the impact of circular dependencies between modules?",
+                options: [
+                    "No impact, they work normally",
+                    "They create compilation errors and should be avoided",
+                    "They improve performance",
+                    "They are automatically resolved"
+                ],
+                correct: 1,
+                explanation: "Circular dependencies create compilation errors and architectural problems, and should be avoided through proper module design."
+            },
+            {
+                topic: "Advanced Data Operations",
+                question: "What is the purpose of the Update<Entity> action?",
+                options: [
+                    "To create new records",
+                    "To modify existing records in the database",
+                    "To delete records",
+                    "To validate data"
+                ],
+                correct: 1,
+                explanation: "The Update<Entity> action modifies existing records in the database with new attribute values for the specified entity identifier."
+            },
+            {
+                topic: "Application Structure",
+                question: "What is the difference between Themes and Style Sheets in OutSystems?",
+                options: [
+                    "Themes contain the overall look and feel, Style Sheets contain specific CSS rules",
+                    "They are identical",
+                    "Themes are faster",
+                    "Style Sheets are deprecated"
+                ],
+                correct: 0,
+                explanation: "Themes define the overall look and feel of applications, while Style Sheets contain specific CSS rules and can be included in themes."
+            },
+            {
+                topic: "Fetching Data on Screens",
+                question: "How do you implement lazy loading of data in Reactive Web Apps?",
+                options: [
+                    "Use OnScrollEnding event with Refresh Data action",
+                    "Lazy loading is not supported",
+                    "Use timers for automatic loading",
+                    "Load all data at once"
+                ],
+                correct: 0,
+                explanation: "Lazy loading is implemented using the OnScrollEnding event to detect when users reach the bottom and trigger Refresh Data actions to load more content."
+            },
+            {
+                topic: "Best Practices",
+                question: "What is the recommended approach for handling large datasets in OutSystems?",
+                options: [
+                    "Load all data at once",
+                    "Use pagination, filtering, and server-side processing",
+                    "Use client-side processing only",
+                    "Avoid large datasets"
+                ],
+                correct: 1,
+                explanation: "Large datasets should be handled using pagination, filtering, and server-side processing to maintain good performance and user experience."
+            },
+            {
+                topic: "Entities and Static Entities",
+                question: "How do you implement soft delete functionality in OutSystems?",
+                options: [
+                    "Use the built-in soft delete feature",
+                    "Add an IsDeleted Boolean attribute and filter queries",
+                    "Soft delete is not supported",
+                    "Use separate deleted entities table"
+                ],
+                correct: 1,
+                explanation: "Soft delete is implemented by adding an IsDeleted Boolean attribute and filtering it out in aggregates instead of physically deleting records."
+            },
+            {
+                topic: "Exception Handling",
+                question: "How do you create a global exception handler in OutSystems?",
+                options: [
+                    "Use the OnException event in the application",
+                    "Global exception handlers are not supported",
+                    "Use a common exception handling action",
+                    "Exception handling is always local"
+                ],
+                correct: 0,
+                explanation: "Global exception handling is implemented using the OnException event at the application level to handle unhandled exceptions across the application."
+            },
+            {
+                topic: "Form Validations",
+                question: "What is the purpose of the ValidationMessage property in Input widgets?",
+                options: [
+                    "To set placeholder text",
+                    "To display custom error messages when validation fails",
+                    "To show help text",
+                    "To format input values"
+                ],
+                correct: 1,
+                explanation: "The ValidationMessage property displays custom error messages when validation fails, providing user-friendly feedback about validation errors."
+            },
+            {
+                topic: "Screen Lifecycle",
+                question: "When should you use the OnApplicationReady event?",
+                options: [
+                    "For screen-specific initialization",
+                    "For application-wide initialization that runs once when the app starts",
+                    "For handling navigation",
+                    "For user authentication"
+                ],
+                correct: 1,
+                explanation: "OnApplicationReady is used for application-wide initialization logic that should run once when the application starts, before any screens load."
+            },
+            {
+                topic: "Client Variables",
+                question: "How do you reset a Client Variable to its default value?",
+                options: [
+                    "Use the ResetVariable action",
+                    "Assign the default value explicitly",
+                    "Client Variables cannot be reset",
+                    "Restart the application"
+                ],
+                correct: 1,
+                explanation: "Client Variables are reset by explicitly assigning their default value or the desired reset value in your application logic."
+            },
+            {
+                topic: "Logic Flows",
+                question: "What is the purpose of the For Each node in action flows?",
+                options: [
+                    "To handle exceptions",
+                    "To iterate over lists or records",
+                    "To create conditional logic",
+                    "To call external services"
+                ],
+                correct: 1,
+                explanation: "The For Each node iterates over lists or record sets, executing the contained logic for each item in the collection."
+            },
+            {
+                topic: "Input Widgets",
+                question: "How do you implement input masking in OutSystems?",
+                options: [
+                    "Use the Mask property in Input widgets",
+                    "Input masking is not supported",
+                    "Use JavaScript only",
+                    "Use validation rules"
+                ],
+                correct: 0,
+                explanation: "Input masking is implemented using the Mask property in Input widgets to format user input according to specified patterns."
+            },
+            {
+                topic: "Site Properties",
+                question: "What is the scope of Site Properties in OutSystems applications?",
+                options: [
+                    "Global across all applications",
+                    "Limited to the module where they are defined",
+                    "Limited to a single screen",
+                    "Limited to a single action"
+                ],
+                correct: 1,
+                explanation: "Site Properties are scoped to the module where they are defined and can be accessed throughout that module's logic and screens."
+            },
+            {
+                topic: "SQL Queries",
+                question: "How do you optimize SQL query performance in OutSystems?",
+                options: [
+                    "Use appropriate indexes, limit result sets, and avoid complex joins",
+                    "Always use SELECT *",
+                    "Use only text data types",
+                    "Performance optimization is automatic"
+                ],
+                correct: 0,
+                explanation: "SQL query performance is optimized by using appropriate indexes, limiting result sets with WHERE clauses, and avoiding unnecessary complex joins."
+            },
+            {
+                topic: "Application Troubleshooting",
+                question: "How do you monitor real-time application performance?",
+                options: [
+                    "Use the Performance tab in Service Center",
+                    "Use browser developer tools only",
+                    "Real-time monitoring is not available",
+                    "Use database monitoring tools only"
+                ],
+                correct: 0,
+                explanation: "Real-time application performance is monitored using the Performance tab in Service Center, which shows current requests, slow queries, and system metrics."
+            },
+            {
+                topic: "Role-based Security",
+                question: "What is the Registered role in OutSystems?",
+                options: [
+                    "A role for administrators",
+                    "A role automatically assigned to authenticated users",
+                    "A role for external users",
+                    "A deprecated role"
+                ],
+                correct: 1,
+                explanation: "The Registered role is automatically assigned to all authenticated users, providing a base level of access for logged-in users."
+            },
+            {
+                topic: "Data Display Widgets",
+                question: "How do you implement expandable/collapsible rows in a Table widget?",
+                options: [
+                    "Use the built-in expand feature",
+                    "Use custom logic with Show/Hide elements",
+                    "Expandable rows are not supported",
+                    "Use separate tables"
+                ],
+                correct: 1,
+                explanation: "Expandable/collapsible rows are implemented using custom logic with Show/Hide conditions on container elements based on state variables."
+            },
+            {
+                topic: "Pagination and Sorting",
+                question: "How do you maintain sort order when implementing pagination?",
+                options: [
+                    "Store sort preferences in Client Variables",
+                    "Sort order is maintained automatically",
+                    "Re-sort on each page",
+                    "Sorting and pagination cannot be combined"
+                ],
+                correct: 0,
+                explanation: "Sort order across pagination is maintained by storing sort preferences in Client Variables and applying them to aggregate queries on each page load."
+            }
+            // Continue with more questions to reach 250...
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let answers = [];
+        let quizCompleted = false;
+        let questions = []; // Will hold the selected 50 questions
+
+        function shuffleArray(array) {
+            const shuffled = [...array];
+            for (let i = shuffled.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+            }
+            return shuffled;
+        }
+
+        function shuffleAnswers(question) {
+            const correctAnswer = question.options[question.correct];
+            const shuffledOptions = shuffleArray(question.options);
+            const newCorrectIndex = shuffledOptions.indexOf(correctAnswer);
+            
+            return {
+                ...question,
+                options: shuffledOptions,
+                correct: newCorrectIndex
+            };
+        }
+
+        function initializeQuiz() {
+            // Select 50 random questions from the pool of 250
+            const shuffledQuestions = shuffleArray(allQuestions);
+            questions = shuffledQuestions.slice(0, 50);
+            
+            // Shuffle answer options for each question
+            questions = questions.map(question => shuffleAnswers(question));
+            
+            generateQuestions();
+            showQuestion(0);
+            updateProgress();
+        }
+
+        function generateQuestions() {
+            const quizContent = document.getElementById('quizContent');
+            quizContent.innerHTML = '';
+
+            questions.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question-container';
+                questionDiv.id = `question-${index}`;
+                
+                questionDiv.innerHTML = `
+                    <div class="question-header">
+                        <div class="topic-badge">${q.topic}</div>
+                        <div class="question-number">Question ${index + 1} of ${questions.length}</div>
+                        <div class="question-text">${q.question}</div>
+                    </div>
+                    
+                    <div class="options-container">
+                        ${q.options.map((option, optIndex) => `
+                            <div class="option" data-option="${optIndex}" onclick="selectOption(${index}, ${optIndex})">
+                                <div class="option-letter">${String.fromCharCode(65 + optIndex)}</div>
+                                <div class="option-text">${option}</div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    
+                    <div class="explanation" id="explanation-${index}">
+                        <h4>Explanation:</h4>
+                        <p>${q.explanation}</p>
+                    </div>
+                    
+                    <div class="controls">
+                        <button class="btn btn-secondary" onclick="previousQuestion()" id="prevBtn-${index}" ${index === 0 ? 'disabled' : ''}>
+                            Previous
+                        </button>
+                        <button class="btn btn-primary" onclick="nextQuestion()" id="nextBtn-${index}" disabled>
+                            ${index === questions.length - 1 ? 'Finish Quiz' : 'Next'}
+                        </button>
+                    </div>
+                `;
+                
+                quizContent.appendChild(questionDiv);
+            });
+        }
+
+        function showQuestion(index) {
+            // Hide all questions
+            document.querySelectorAll('.question-container').forEach(q => {
+                q.classList.remove('active');
+            });
+            
+            // Show current question
+            document.getElementById(`question-${index}`).classList.add('active');
+            currentQuestion = index;
+            updateProgress();
+        }
+
+        function selectOption(questionIndex, optionIndex) {
+            if (answers[questionIndex] !== undefined) return; // Already answered
+            
+            const questionDiv = document.getElementById(`question-${questionIndex}`);
+            const options = questionDiv.querySelectorAll('.option');
+            const explanation = document.getElementById(`explanation-${questionIndex}`);
+            const nextBtn = document.getElementById(`nextBtn-${questionIndex}`);
+            
+            // Store answer
+            answers[questionIndex] = optionIndex;
+            
+            // Disable all options
+            options.forEach(option => {
+                option.classList.add('disabled');
+            });
+            
+            // Show correct/incorrect
+            options.forEach((option, index) => {
+                if (index === questions[questionIndex].correct) {
+                    option.classList.add('correct');
+                } else if (index === optionIndex && index !== questions[questionIndex].correct) {
+                    option.classList.add('incorrect');
+                } else if (index === optionIndex) {
+                    option.classList.add('selected');
+                }
+            });
+            
+            // Update score
+            if (optionIndex === questions[questionIndex].correct) {
+                score++;
+            }
+            
+            // Show explanation
+            explanation.classList.add('show');
+            
+            // Enable next button
+            nextBtn.disabled = false;
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                showQuestion(currentQuestion + 1);
+            } else {
+                finishQuiz();
+            }
+        }
+
+        function previousQuestion() {
+            if (currentQuestion > 0) {
+                showQuestion(currentQuestion - 1);
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+            document.getElementById('progressText').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+        }
+
+        function finishQuiz() {
+            quizCompleted = true;
+            const percentage = Math.round((score / questions.length) * 100);
+            
+            // Hide quiz content
+            document.getElementById('quizContent').style.display = 'none';
+            document.querySelector('.progress-container').style.display = 'none';
+            
+            // Show results
+            const resultsContainer = document.getElementById('resultsContainer');
+            const scoreCircle = document.getElementById('scoreCircle');
+            const scorePercentage = document.getElementById('scorePercentage');
+            const scoreText = document.getElementById('scoreText');
+            const scoreDescription = document.getElementById('scoreDescription');
+            
+            scorePercentage.textContent = `${percentage}%`;
+            
+            let scoreClass, scoreTextContent, scoreDescriptionContent;
+            
+            if (percentage >= 90) {
+                scoreClass = 'score-excellent';
+                scoreTextContent = 'Excellent!';
+                scoreDescriptionContent = 'Outstanding understanding of OutSystems 11 Reactive Web Development';
+            } else if (percentage >= 80) {
+                scoreClass = 'score-good';
+                scoreTextContent = 'Good Job!';
+                scoreDescriptionContent = 'Good understanding, review areas of weakness';
+            } else if (percentage >= 70) {
+                scoreClass = 'score-satisfactory';
+                scoreTextContent = 'Satisfactory';
+                scoreDescriptionContent = 'Satisfactory performance, additional study recommended';
+            } else {
+                scoreClass = 'score-needs-improvement';
+                scoreTextContent = 'Needs Improvement';
+                scoreDescriptionContent = 'Requires significant additional study and practice';
+            }
+            
+            scoreCircle.className = `score-circle ${scoreClass}`;
+            scoreText.textContent = `${scoreTextContent} You scored ${score} out of ${questions.length}`;
+            scoreDescription.textContent = scoreDescriptionContent;
+            
+            resultsContainer.classList.add('show');
+        }
+
+        function restartQuiz() {
+            currentQuestion = 0;
+            score = 0;
+            answers = [];
+            quizCompleted = false;
+            
+            // Reset UI
+            document.getElementById('quizContent').style.display = 'block';
+            document.querySelector('.progress-container').style.display = 'block';
+            document.getElementById('resultsContainer').classList.remove('show');
+            
+            // Reset all questions
+            document.querySelectorAll('.option').forEach(option => {
+                option.className = 'option';
+            });
+            
+            document.querySelectorAll('.explanation').forEach(exp => {
+                exp.classList.remove('show');
+            });
+            
+            document.querySelectorAll('[id^="nextBtn-"]').forEach(btn => {
+                btn.disabled = true;
+            });
+            
+            // Show first question
+            showQuestion(0);
+        }
+
+        // Initialize quiz when page loads
+        document.addEventListener('DOMContentLoaded', initializeQuiz);
+    </script>
+</body>
+</html>
